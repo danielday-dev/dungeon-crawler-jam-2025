@@ -1,7 +1,9 @@
 extends Node3D
 
 @onready var head : Node3D = $Head
-@onready var camera : Node3D = $Head/Camera3D
+@onready var camera : Node3D = $Head/FirstPersonCamera
+
+@onready var map_cam_position: Node3D = $Head/MapCameraPos
 
 const MOVE_SPEED: float = 128.0
 const TURN_SPEED: float = 180.0
@@ -15,6 +17,8 @@ var move_direction: Vector3 = Vector3.ZERO
 var turn_rotation_amount: float = 0.0
 var is_turning: bool = false
 var input_turn_direction: float = 0.0
+
+signal onPlayerMove
 
 func _unhandled_input(event):
 	if event is InputEventKey:

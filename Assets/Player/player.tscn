@@ -9,7 +9,10 @@ script = ExtResource("1_61lih")
 
 [node name="Head" type="Node3D" parent="."]
 
-[node name="Camera3D" type="Camera3D" parent="Head"]
+[node name="FirstPersonCamera" type="Camera3D" parent="Head"]
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+[node name="MapCameraPos" type="Node3D" parent="Head"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 5.99878, 0)
+
+[node name="PlayerModel" type="MeshInstance3D" parent="."]
 mesh = SubResource("CapsuleMesh_61lih")
