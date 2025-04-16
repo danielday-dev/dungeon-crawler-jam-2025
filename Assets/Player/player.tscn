@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://dvfg7eq1a00s2"]
+
+[ext_resource type="Script" uid="uid://cpsda0ux512xh" path="res://Assets/Player/player.gd" id="1_61lih"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_61lih"]
+
+[node name="Player" type="Node3D"]
+script = ExtResource("1_61lih")
+
+[node name="Head" type="Node3D" parent="."]
+
+[node name="Camera3D" type="Camera3D" parent="Head"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("CapsuleMesh_61lih")
