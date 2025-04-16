@@ -16,9 +16,6 @@ var turn_rotation_amount: float = 0.0
 var is_turning: bool = false
 var input_turn_direction: float = 0.0
 
-func _ready():
-	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-
 func _unhandled_input(event):
 	if event is InputEventKey:
 		if event.pressed and event.keycode == KEY_ESCAPE:
