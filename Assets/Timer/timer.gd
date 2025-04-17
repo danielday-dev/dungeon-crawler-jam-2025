@@ -1,13 +1,16 @@
-extends RichTextLabel
+extends Node
+
+class_name Heartbeat
 
 @onready var _audio_source = $AudioStreamPlayer
+@export var _text : RichTextLabel
 
 var _time_left : float = 5.0 * 60.0;
-var _base_bpm := 60.0
-var _bpm := 60.0
+var _base_bpm := 30.0
+var _bpm := 30.0
 var _time_since_last_beat = 0.0
 
-signal onHeartBeat
+signal heart_beat
 
 func _process(delta: float) -> void:
 	_update_timer(delta)
@@ -18,7 +21,7 @@ func _update_timer(delta: float) -> void:
 	_time_left -= delta * bpm_modifier
 	var mins = floor(_time_left / 60.0)
 	var secs = _time_left - (mins * 60.0)
-	text = "%02d: %02d" % [mins, secs]
+	_text.text = "%02d: %02d" % [mins, secs]
 
 func _heartbeat(delta: float) -> void:
 	_time_since_last_beat += delta
@@ -29,4 +32,4 @@ func _heartbeat(delta: float) -> void:
 
 func _play_heartbeat() -> void:
 	_audio_source.play()
-	onHeartBeat.emit()
+	heart_beat.emit()

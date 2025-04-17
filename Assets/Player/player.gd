@@ -1,5 +1,7 @@
 extends Node3D
 
+class_name Player
+
 @onready var head : Node3D = $Head
 @onready var camera : Node3D = $Head/FirstPersonCamera
 
@@ -18,7 +20,7 @@ var turn_rotation_amount: float = 0.0
 var is_turning: bool = false
 var input_turn_direction: float = 0.0
 
-func _unhandled_input(event):
+func _unhandled_input(event) -> void:
 	if event is InputEventKey:
 		if event.pressed and event.keycode == KEY_ESCAPE:
 			get_tree().quit()
@@ -27,7 +29,7 @@ func _physics_process(delta: float) -> void:
 	_move_tile(delta)
 	_turn_head(delta)
 
-func _move_tile(delta):
+func _move_tile(delta) -> void:
 	if is_moving:
 		var next_move_amount = move_toward(move_amount, TILE_SIZE, MOVE_SPEED  * delta)
 		position += (next_move_amount - move_amount) * move_direction * delta
@@ -46,7 +48,7 @@ func _move_tile(delta):
 		is_moving = true
 		return
 
-func _turn_head(delta: float):
+func _turn_head(delta: float) -> void:
 	# Turning cooldown
 	if is_turning:
 		var next_turn_amount = move_toward(turn_rotation_amount, 90, TURN_SPEED * delta)
