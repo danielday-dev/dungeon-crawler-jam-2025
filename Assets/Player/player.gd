@@ -18,8 +18,6 @@ var turn_rotation_amount: float = 0.0
 var is_turning: bool = false
 var input_turn_direction: float = 0.0
 
-signal onPlayerMove
-
 func _unhandled_input(event):
 	if event is InputEventKey:
 		if event.pressed and event.keycode == KEY_ESCAPE:
@@ -37,7 +35,6 @@ func _move_tile(delta):
 		if move_amount >= TILE_SIZE:
 			move_amount = 0.0
 			is_moving = false
-			print_debug("finish moving")
 		return;
 	
 	# Prioritise forward move over side moves - do not allow diagonals
@@ -47,7 +44,6 @@ func _move_tile(delta):
 	if move_input_v != 0.0 || move_input_h:
 		move_direction = (head.transform.basis * Vector3(move_input_h, 0, move_input_v)).normalized()
 		is_moving = true
-		print_debug("start moving")
 		return
 
 func _turn_head(delta: float):
@@ -58,7 +54,6 @@ func _turn_head(delta: float):
 		turn_rotation_amount = next_turn_amount
 		if turn_rotation_amount >= ROTATE_DEGREES:
 			is_turning = false
-			print_debug("finished turning")
 		return
 	
 	input_turn_direction = Input.get_axis("look_left", "look_right")
@@ -66,6 +61,5 @@ func _turn_head(delta: float):
 	if input_turn_direction == 0.0:
 		return
 	
-	print_debug("turning..")
 	is_turning = true
 	turn_rotation_amount = 0.0

@@ -1,7 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://dnfslepljw6c2"]
+[gd_scene load_steps=9 format=3 uid="uid://dnfslepljw6c2"]
 
 [ext_resource type="PackedScene" uid="uid://dvfg7eq1a00s2" path="res://Assets/Player/player.tscn" id="1_s41d2"]
-[ext_resource type="Script" uid="uid://cjq6hjyjcbwxh" path="res://Levels/sub_viewport.gd" id="2_gtnvv"]
+[ext_resource type="Script" uid="uid://cjq6hjyjcbwxh" path="res://Levels/minimap.gd" id="2_gtnvv"]
+[ext_resource type="PackedScene" uid="uid://be0lmohgkj2qu" path="res://Assets/Timer/timer_text.tscn" id="3_wav5q"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_s41d2"]
 sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
@@ -63,3 +64,5 @@ player_node = NodePath("../../../Player")
 [node name="MapCamera3D" type="Camera3D" parent="CanvasLayer/SubViewportContainer/SubViewport"]
 projection = 1
 size = 10.0
+
+[node name="TimerText" parent="CanvasLayer" instance=ExtResource("3_wav5q")]
