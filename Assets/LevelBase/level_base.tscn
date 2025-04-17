@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://b2ljwpxvaib4e"]
+
+[ext_resource type="MeshLibrary" uid="uid://d2q1o308mx02r" path="res://Assets/LevelBase/level_grid.tres" id="1_s5mal"]
+[ext_resource type="Script" uid="uid://la213bs378ba" path="res://Assets/LevelBase/level_autotile.gd" id="2_a8rdq"]
+
+[node name="LevelBase" type="GridMap"]
+mesh_library = ExtResource("1_s5mal")
+cell_size = Vector3(1, 1, 1)
+script = ExtResource("2_a8rdq")
+metadata/_editor_floor_ = Vector3(0, 0, 0)
