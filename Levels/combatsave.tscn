@@ -1,0 +1,127 @@
+[gd_scene load_steps=15 format=3 uid="uid://dnfslepljw6c2"]
+
+[ext_resource type="Script" uid="uid://7jbtp3hsw3gc" path="res://Assets/Combat/combat.gd" id="1_k1dr4"]
+[ext_resource type="PackedScene" uid="uid://dhuuv1e6aff8j" path="res://Assets/Timer/heartbeat.tscn" id="2_cnvjw"]
+[ext_resource type="PackedScene" uid="uid://b4tx0jgg7b4pn" path="res://Assets/Combat/Gun/gun.tscn" id="4_pyban"]
+[ext_resource type="Script" uid="uid://cpsda0ux512xh" path="res://Assets/Entities/Player/player.gd" id="5_k1dr4"]
+[ext_resource type="Script" uid="uid://cjq6hjyjcbwxh" path="res://Assets/Minimap/minimap.gd" id="6_abpda"]
+[ext_resource type="SpriteFrames" uid="uid://d32lrvp3xi3t3" path="res://Assets/Entities/Enemies/FleshHulk/flesh_hulk_sprite_frames.tres" id="7_pexy1"]
+[ext_resource type="Texture2D" uid="uid://b5qmfdecqiriy" path="res://Assets/Entities/Enemies/Sprites/weak_spot.png" id="8_2f6in"]
+[ext_resource type="Script" uid="uid://b7uf43us23rwd" path="res://Assets/Combat/weak_spot.gd" id="9_7v56p"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_s41d2"]
+sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+ground_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+
+[sub_resource type="Sky" id="Sky_gtnvv"]
+sky_material = SubResource("ProceduralSkyMaterial_s41d2")
+
+[sub_resource type="Environment" id="Environment_wav5q"]
+background_mode = 2
+sky = SubResource("Sky_gtnvv")
+tonemap_mode = 2
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_61lih"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_s41d2"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_s41d2"]
+
+[node name="Level" type="Node3D"]
+
+[node name="Combat" type="Node" parent="."]
+script = ExtResource("1_k1dr4")
+
+[node name="Heartbeat" parent="." node_paths=PackedStringArray("_text") instance=ExtResource("2_cnvjw")]
+_text = NodePath("../CanvasLayer/TimerText")
+
+[node name="Gun" parent="." instance=ExtResource("4_pyban")]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_wav5q")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 0, 0)
+shadow_enabled = true
+
+[node name="Player" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00156617, 0.00160146, -0.000651836)
+script = ExtResource("5_k1dr4")
+
+[node name="Head" type="Node3D" parent="Player"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, 0)
+
+[node name="FirstPersonCamera" type="Camera3D" parent="Player/Head"]
+
+[node name="MapCameraPos" type="Node3D" parent="Player/Head"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 5.99878, 0)
+
+[node name="PlayerModel" type="MeshInstance3D" parent="Player"]
+mesh = SubResource("CapsuleMesh_61lih")
+
+[node name="Floor" type="MeshInstance3D" parent="."]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, -1, 0)
+mesh = SubResource("PlaneMesh_s41d2")
+
+[node name="TestObject" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, -3.5)
+mesh = SubResource("BoxMesh_s41d2")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="CanvasLayer"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -120.0
+offset_top = 20.0
+offset_right = -20.0
+offset_bottom = 120.0
+grow_horizontal = 0
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="CanvasLayer/SubViewportContainer" node_paths=PackedStringArray("camera_node")]
+handle_input_locally = false
+size = Vector2i(100, 100)
+render_target_update_mode = 4
+script = ExtResource("6_abpda")
+camera_node = NodePath("MapCamera3D")
+
+[node name="MapCamera3D" type="Camera3D" parent="CanvasLayer/SubViewportContainer/SubViewport"]
+projection = 1
+size = 10.0
+
+[node name="TimerText" type="RichTextLabel" parent="CanvasLayer"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -117.5
+offset_right = 117.5
+offset_bottom = 40.0
+grow_horizontal = 2
+text = "TIMER"
+horizontal_alignment = 1
+
+[node name="Enemy" type="AnimatedSprite3D" parent="."]
+transform = Transform3D(0.75, 0, 0, 0, 0.75, 0, 0, 0, 0.75, -2, -0.3, 0)
+billboard = 2
+texture_filter = 0
+sprite_frames = ExtResource("7_pexy1")
+
+[node name="WeakSpots" type="Node3D" parent="Enemy"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.2)
+visible = false
+
+[node name="WeakSpot1" type="Sprite3D" parent="Enemy/WeakSpots"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.013, 0.283, 0)
+billboard = 2
+double_sided = false
+texture = ExtResource("8_2f6in")
+script = ExtResource("9_7v56p")
+
+[node name="WeakSpot2" type="Sprite3D" parent="Enemy/WeakSpots"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.641515, -0.202674, 0)
+billboard = 2
+double_sided = false
+texture = ExtResource("8_2f6in")
+script = ExtResource("9_7v56p")

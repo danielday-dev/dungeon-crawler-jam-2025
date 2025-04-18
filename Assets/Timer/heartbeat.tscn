@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://dhuuv1e6aff8j"]
+
+[ext_resource type="Script" uid="uid://te48db7j1h6v" path="res://Assets/Timer/timer.gd" id="1_hsret"]
+[ext_resource type="AudioStream" uid="uid://com5h5y7sevbb" path="res://Assets/Timer/Countdown_Tick.wav" id="2_6grpj"]
+
+[node name="Heartbeat" type="Node" node_paths=PackedStringArray("_text")]
+script = ExtResource("1_hsret")
+_text = NodePath("")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_6grpj")
+volume_db = -30.0

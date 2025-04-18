@@ -1,0 +1,46 @@
+[gd_resource type="SpriteFrames" load_steps=8 format=3 uid="uid://dqcvgwukge7b3"]
+
+[ext_resource type="Texture2D" uid="uid://drnw4jc38wvma" path="res://Assets/Combat/Gun/sprites/gun1.png" id="1_pojma"]
+[ext_resource type="Texture2D" uid="uid://byr2vxko2nw6q" path="res://Assets/Combat/Gun/sprites/gun2.png" id="2_w6fvf"]
+[ext_resource type="Texture2D" uid="uid://d3vqy7f44lvv7" path="res://Assets/Combat/Gun/sprites/gun3.png" id="3_qw6n5"]
+[ext_resource type="Texture2D" uid="uid://d3b8luylgukfx" path="res://Assets/Combat/Gun/sprites/gun5.png" id="4_ngt3x"]
+[ext_resource type="Texture2D" uid="uid://dgo2ctjhrc2he" path="res://Assets/Combat/Gun/sprites/gun6.png" id="5_kwo2l"]
+[ext_resource type="Texture2D" uid="uid://ck5e1k6nd0pi4" path="res://Assets/Combat/Gun/sprites/gun7.png" id="6_7px6l"]
+[ext_resource type="Texture2D" uid="uid://c56cekdpvukcp" path="res://Assets/Combat/Gun/sprites/gun8.png" id="7_wbcud"]
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_pojma")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_pojma")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_w6fvf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_qw6n5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_ngt3x")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_kwo2l")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_7px6l")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_wbcud")
+}],
+"loop": true,
+"name": &"shoot",
+"speed": 5.0
+}]

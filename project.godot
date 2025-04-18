@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="dungeon-crawler-jam-2025"
-run/main_scene="uid://dnfslepljw6c2"
+run/main_scene="uid://hr5pvy331ima"
 config/features=PackedStringArray("4.4", "GL Compatibility")
 
 [display]
@@ -23,7 +23,8 @@ window/stretch/mode="canvas_items"
 [file_customization]
 
 folder_colors={
-"res://Assets/": "red",
+"res://Assets/": "pink",
+"res://Assets/Entities/": "teal",
 "res://Levels/": "blue",
 "res://Scripts/": "yellow"
 }
@@ -67,5 +68,6 @@ look_right={
 
 [rendering]
 
+textures/canvas_textures/default_texture_filter=0
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"

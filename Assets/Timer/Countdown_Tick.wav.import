@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://com5h5y7sevbb"
-path="res://.godot/imported/Countdown_Tick.wav-a0a4e794c1853ae0851bd479c34998be.sample"
+path="res://.godot/imported/Countdown_Tick.wav-97832d9f7d055c9511e32709f98e3818.sample"
 
 [deps]
 
-source_file="res://Countdown_Tick.wav"
-dest_files=["res://.godot/imported/Countdown_Tick.wav-a0a4e794c1853ae0851bd479c34998be.sample"]
+source_file="res://Assets/Timer/Countdown_Tick.wav"
+dest_files=["res://.godot/imported/Countdown_Tick.wav-97832d9f7d055c9511e32709f98e3818.sample"]
 
 [params]
 
