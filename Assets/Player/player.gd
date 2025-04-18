@@ -28,25 +28,29 @@ func _physics_process(delta: float) -> void:
 	_turn_head(delta)
 
 func _move_tile(delta):
+	if is_turning: return
 	if is_moving:
 		var next_move_amount = move_toward(move_amount, TILE_SIZE, MOVE_SPEED  * delta)
 		position += (next_move_amount - move_amount) * move_direction * delta
 		move_amount = next_move_amount
-		if move_amount >= TILE_SIZE:
+		if move_amount == TILE_SIZE:
 			move_amount = 0.0
 			is_moving = false
 		return;
 	
-	# Prioritise forward move over side moves - do not allow diagonals
-	var move_input_v := Input.get_axis("up", "down");
-	var move_input_h := Input.get_axis("left", "right")
+	var move_input_v = Input.get_axis("up", "down");
+	var move_input_h = Input.get_axis("left", "right")
 	
-	if move_input_v != 0.0 || move_input_h:
-		move_direction = (head.transform.basis * Vector3(move_input_h, 0, move_input_v)).normalized()
+	if move_input_v || move_input_h:
+		# Prioritise forward move over side moves - do not allow diagonals
+		var base_vector = Vector3(0.0 if move_input_v else move_input_h, 0.0, move_input_v)
+		
+		move_direction = (head.transform.basis * base_vector).normalized()
 		is_moving = true
 		return
 
 func _turn_head(delta: float):
+	if is_moving: return
 	# Turning cooldown
 	if is_turning:
 		var next_turn_amount = move_toward(turn_rotation_amount, 90, TURN_SPEED * delta)
