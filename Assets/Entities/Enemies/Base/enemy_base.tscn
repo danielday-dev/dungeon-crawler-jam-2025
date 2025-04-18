@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://dkllpxntoh3mu"]
+
+[ext_resource type="Script" uid="uid://u6yfwm8oa27s" path="res://Assets/Entities/Enemies/Base/enemy_base.gd" id="1_l62ra"]
+
+[node name="EnemyBase" type="Node3D"]
+script = ExtResource("1_l62ra")
+m_turnLerpTime = 0.0
+
+[node name="EnemySprite" type="Sprite3D" parent="."]
+pixel_size = 0.004
+billboard = 2

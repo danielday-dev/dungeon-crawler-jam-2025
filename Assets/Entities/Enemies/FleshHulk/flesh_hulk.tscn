@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://b7va83v27o3r5"]
+
+[ext_resource type="PackedScene" uid="uid://dkllpxntoh3mu" path="res://Assets/Entities/Enemies/Base/enemy_base.tscn" id="1_6nyh7"]
+[ext_resource type="Texture2D" uid="uid://bucvtxmwqthrd" path="res://Assets/Entities/Enemies/FleshHulk/fleshguy.png" id="2_6w2wm"]
+
+[node name="EnemyBase" instance=ExtResource("1_6nyh7")]
+
+[node name="EnemySprite" parent="." index="0"]
+texture = ExtResource("2_6w2wm")
