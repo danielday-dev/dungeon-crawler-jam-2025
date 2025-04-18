@@ -29,9 +29,8 @@ tonemap_mode = 2
 
 [node name="Level" type="Node3D"]
 
-[node name="Combat" type="Node" parent="." node_paths=PackedStringArray("timer")]
+[node name="Combat" type="Node" parent="."]
 script = ExtResource("1_k1dr4")
-timer = NodePath("")
 
 [node name="Heartbeat" parent="." node_paths=PackedStringArray("_text") instance=ExtResource("2_cnvjw")]
 _text = NodePath("../CanvasLayer/TimerText")
