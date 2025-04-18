@@ -1,14 +1,13 @@
-[gd_scene load_steps=15 format=3 uid="uid://dnfslepljw6c2"]
+[gd_scene load_steps=14 format=3 uid="uid://dnfslepljw6c2"]
 
 [ext_resource type="Script" uid="uid://7jbtp3hsw3gc" path="res://Scripts/combat.gd" id="1_8a2b0"]
 [ext_resource type="PackedScene" uid="uid://dvfg7eq1a00s2" path="res://Assets/Player/player.tscn" id="1_s41d2"]
 [ext_resource type="AudioStream" uid="uid://com5h5y7sevbb" path="res://Countdown_Tick.wav" id="1_t80w2"]
 [ext_resource type="Script" uid="uid://te48db7j1h6v" path="res://Assets/Timer/timer.gd" id="1_uhyyw"]
 [ext_resource type="Script" uid="uid://cjq6hjyjcbwxh" path="res://Levels/minimap.gd" id="2_wav5q"]
-[ext_resource type="PackedScene" uid="uid://b4tx0jgg7b4pn" path="res://Assets/Gun/gun.tscn" id="4_8a2b0"]
-[ext_resource type="SpriteFrames" uid="uid://d32lrvp3xi3t3" path="res://Assets/Enemies/FleshHulk/flesh_hulk_sprite_frames.tres" id="8_ecu0b"]
-[ext_resource type="Texture2D" uid="uid://b5qmfdecqiriy" path="res://Sprites/weak_spot.png" id="8_t2u7g"]
-[ext_resource type="Script" uid="uid://b7uf43us23rwd" path="res://Scripts/weak_spot.gd" id="9_t2u7g"]
+[ext_resource type="Texture2D" uid="uid://drnw4jc38wvma" path="res://Assets/Gun/sprites/gun1.png" id="4_8a2b0"]
+[ext_resource type="Texture2D" uid="uid://bucvtxmwqthrd" path="res://Assets/Enemies/FleshHulk/fleshguy.png" id="4_xto7t"]
+[ext_resource type="Script" uid="uid://dq7y2s3shi1qg" path="res://Assets/Gun/gun.gd" id="5_ecu0b"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_s41d2"]
 sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
@@ -40,7 +39,11 @@ _text = NodePath("../CanvasLayer/TimerText")
 stream = ExtResource("1_t80w2")
 volume_db = -30.0
 
-[node name="Gun" parent="." instance=ExtResource("4_8a2b0")]
+[node name="Gun" type="Sprite2D" parent="Heartbeat"]
+texture = ExtResource("4_8a2b0")
+centered = false
+script = ExtResource("5_ecu0b")
+_gun_follow_speed = null
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_wav5q")
@@ -96,28 +99,9 @@ grow_horizontal = 2
 text = "TIMER"
 horizontal_alignment = 1
 
-[node name="Enemy" type="AnimatedSprite3D" parent="."]
+[node name="Sprite3D" type="Sprite3D" parent="."]
 transform = Transform3D(0.75, 0, 0, 0, 0.75, 0, 0, 0, 0.75, -2, -0.3, 0)
-billboard = 2
-texture_filter = 0
-sprite_frames = ExtResource("8_ecu0b")
-
-[node name="WeakSpots" type="Node3D" parent="Enemy"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.2)
-visible = false
-
-[node name="WeakSpot1" type="Sprite3D" parent="Enemy/WeakSpots"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.013, 0.283, 0)
-billboard = 2
-double_sided = false
-texture = ExtResource("8_t2u7g")
-script = ExtResource("9_t2u7g")
-
-[node name="WeakSpot2" type="Sprite3D" parent="Enemy/WeakSpots"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.641515, -0.202674, 0)
-billboard = 2
-double_sided = false
-texture = ExtResource("8_t2u7g")
-script = ExtResource("9_t2u7g")
+billboard = 1
+texture = ExtResource("4_xto7t")
 
 [connection signal="heart_beat" from="Heartbeat" to="Combat" method="_on_heartbeat_heart_beat"]

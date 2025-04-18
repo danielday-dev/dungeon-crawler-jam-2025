@@ -6,8 +6,8 @@ class_name Heartbeat
 @export var _text : RichTextLabel
 
 var _time_left : float = 5.0 * 60.0;
-var _base_bpm := 30.0
-var _bpm := 30.0
+var _base_bpm := 60.0
+var _bpm := 60.0
 var _time_since_last_beat = 0.0
 
 signal heart_beat

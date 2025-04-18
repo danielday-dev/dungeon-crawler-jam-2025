@@ -30,6 +30,9 @@ func _physics_process(delta: float) -> void:
 	_turn_head(delta)
 
 func _move_tile(delta) -> void:
+	if is_turning:
+		return
+	
 	if is_moving:
 		var next_move_amount = move_toward(move_amount, TILE_SIZE, MOVE_SPEED  * delta)
 		position += (next_move_amount - move_amount) * move_direction * delta
@@ -49,6 +52,9 @@ func _move_tile(delta) -> void:
 		return
 
 func _turn_head(delta: float) -> void:
+	if is_moving:
+		return
+	
 	# Turning cooldown
 	if is_turning:
 		var next_turn_amount = move_toward(turn_rotation_amount, 90, TURN_SPEED * delta)

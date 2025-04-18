@@ -23,8 +23,10 @@ window/stretch/mode="canvas_items"
 [file_customization]
 
 folder_colors={
-"res://Assets/": "red",
-"res://Levels/": "blue"
+"res://Assets/": "pink",
+"res://Levels/": "blue",
+"res://Scripts/": "gray",
+"res://Sprites/": "green"
 }
 
 [input]
@@ -66,5 +68,6 @@ look_right={
 
 [rendering]
 
+textures/canvas_textures/default_texture_filter=0
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
