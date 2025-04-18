@@ -102,26 +102,6 @@ func update_position_visuals() -> void:
 func is_turning() -> bool:
 	return m_turnCurrent != m_turnTarget;
 	
-	
-	
-	
-	
-	
-		
-	
-	
-	
-	
-	
-	
-	
-static func get_turn_angle(direction : TurnDirection) -> float:
-	match (direction):
-		TurnDirection.East: return 270.0;
-		TurnDirection.South: return 180.0;
-		TurnDirection.West: return 90.0;
-		_: return 0.0;
-	
 func update_turn(delta : float) -> bool:
 	if (!is_turning()): return false;
 	

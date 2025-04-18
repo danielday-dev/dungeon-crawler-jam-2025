@@ -17,19 +17,26 @@ enum PathActions {
 #########################################################################
 # Helper Functions.
 
-func get_turn_forward(turn : TurnDirection) -> Vector2i:
+static func get_turn_forward(turn : TurnDirection) -> Vector2i:
 	match (turn):
 		TurnDirection.East: return Vector2i(-1, 0);
 		TurnDirection.South: return Vector2i(0, -1);
 		TurnDirection.West: return Vector2i(1, 0);
 		_: return Vector2i(0, 1);
 
-func get_turn_right(turn : TurnDirection) -> Vector2i:
+static func get_turn_right(turn : TurnDirection) -> Vector2i:
 	match (turn):
 		TurnDirection.East: return Vector2i(0, 1);
 		TurnDirection.South: return Vector2i(-1, 0);
 		TurnDirection.West: return Vector2i(0, -1);
 		_: return Vector2i(1, 0);
+
+static func get_turn_angle(direction : TurnDirection) -> float:
+	match (direction):
+		TurnDirection.East: return 270.0;
+		TurnDirection.South: return 180.0;
+		TurnDirection.West: return 90.0;
+		_: return 0.0;
 
 #########################################################################
 # Grid Collision.
