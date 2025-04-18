@@ -7,13 +7,11 @@ static var s_instance : Player = null;
 @onready var camera : Camera3D = $Head/FirstPersonCamera
 @onready var map_cam_position : Node3D = $Head/MapCameraPos
 
-func _ready() -> void:
+func _init() -> void:
 	if (s_instance != null):
 		queue_free();
 		return;
 	s_instance = self;
-
-	super();
 
 func poll_inputs() -> void:
 	m_input_move = Vector2i(

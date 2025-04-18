@@ -4,6 +4,9 @@ class_name EntityBase
 #########################################################################
 # API.
 
+signal on_move_end;
+signal on_turn_end;
+
 var m_input_move : Vector2i = Vector2i.ZERO;
 var m_input_turn : float = 0.0;
 
@@ -89,6 +92,8 @@ func update_position(delta : float) -> bool:
 	
 	m_positionCurrent = m_positionTarget;
 	m_positionLerp = 0;
+	
+	on_move_end.emit();
 	return false;
 
 func update_position_visuals() -> void:
@@ -115,6 +120,8 @@ func update_turn(delta : float) -> bool:
 	
 	m_turnCurrent = m_turnTarget;
 	m_turnLerp = 0;
+	
+	on_turn_end.emit()
 	return false;
 	
 func update_turn_visuals() -> void:
