@@ -1,0 +1,99 @@
+[gd_scene load_steps=4 format=3 uid="uid://cgsehtogg3vj0"]
+
+[ext_resource type="Script" uid="uid://dvjkng53h6x7x" path="res://Assets/UI/Menus/MainMenu/MainMenu.gd" id="1_8tk1w"]
+[ext_resource type="Texture2D" uid="uid://cnvmh2xhw1b34" path="res://Assets/UI/Menus/MainMenu/heart.png" id="1_h1klf"]
+[ext_resource type="Texture2D" uid="uid://dqbk83h5sjgm8" path="res://Assets/UI/Menus/MainMenu/title.png" id="1_jgaae"]
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 640.0
+offset_bottom = 360.0
+script = ExtResource("1_8tk1w")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.326741, 0.0709833, 0.0658222, 1)
+
+[node name="HSplit" type="HSplitContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+split_offset = 213
+dragging_enabled = false
+
+[node name="VSplit" type="VSplitContainer" parent="HSplit"]
+layout_mode = 2
+split_offset = 120
+dragging_enabled = false
+
+[node name="VBox" type="VBoxContainer" parent="HSplit/VSplit"]
+layout_mode = 2
+alignment = 1
+
+[node name="PlayButton" type="Button" parent="HSplit/VSplit/VBox"]
+layout_mode = 2
+text = "Play"
+
+[node name="CloseButton" type="Button" parent="HSplit/VSplit/VBox"]
+layout_mode = 2
+text = "Close"
+
+[node name="HeartTexture" type="TextureRect" parent="HSplit/VSplit"]
+layout_mode = 2
+texture = ExtResource("1_h1klf")
+expand_mode = 1
+
+[node name="VSplit2" type="VSplitContainer" parent="HSplit"]
+layout_mode = 2
+split_offset = 240
+dragging_enabled = false
+
+[node name="TitleSprite" type="TextureRect" parent="HSplit/VSplit2"]
+layout_mode = 2
+texture = ExtResource("1_jgaae")
+
+[node name="HSplit2" type="HSplitContainer" parent="HSplit/VSplit2"]
+layout_mode = 2
+split_offset = 200
+dragging_enabled = false
+
+[node name="Buffer" type="Container" parent="HSplit/VSplit2/HSplit2"]
+layout_mode = 2
+
+[node name="CreditsBox" type="VBoxContainer" parent="HSplit/VSplit2/HSplit2"]
+layout_mode = 2
+alignment = 1
+
+[node name="CreditsLabel" type="Label" parent="HSplit/VSplit2/HSplit2/CreditsBox"]
+layout_mode = 2
+text = "Credits:"
+
+[node name="DanCredit" type="LinkButton" parent="HSplit/VSplit2/HSplit2/CreditsBox"]
+layout_mode = 2
+text = "Dan"
+underline = 1
+uri = "https://hjmw.itch.io/"
+
+[node name="JordanCredit" type="LinkButton" parent="HSplit/VSplit2/HSplit2/CreditsBox"]
+layout_mode = 2
+text = "Jordan"
+underline = 1
+uri = "https://jawdandev.itch.io/"
+
+[node name="BethCredit" type="LinkButton" parent="HSplit/VSplit2/HSplit2/CreditsBox"]
+layout_mode = 2
+text = "Beth"
+underline = 1
+uri = "https://befany.itch.io/"
+
+[connection signal="pressed" from="HSplit/VSplit/VBox/PlayButton" to="." method="_on_play_button_pressed"]
+[connection signal="pressed" from="HSplit/VSplit/VBox/CloseButton" to="." method="_on_close_button_pressed"]
