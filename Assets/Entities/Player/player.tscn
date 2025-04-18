@@ -1,15 +1,19 @@
 [gd_scene load_steps=3 format=3 uid="uid://dvfg7eq1a00s2"]
 
-[ext_resource type="Script" uid="uid://cpsda0ux512xh" path="res://Assets/Player/player.gd" id="1_61lih"]
+[ext_resource type="Script" uid="uid://cpsda0ux512xh" path="res://Assets/Entities/Player/player.gd" id="1_61lih"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_61lih"]
+radius = 0.25
+height = 1.0
 
 [node name="Player" type="Node3D"]
 script = ExtResource("1_61lih")
 
 [node name="Head" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0)
 
 [node name="FirstPersonCamera" type="Camera3D" parent="Head"]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 0, 0)
 
 [node name="MapCameraPos" type="Node3D" parent="Head"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 5.99878, 0)

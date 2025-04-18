@@ -11,6 +11,7 @@ var m_undoredo : EditorUndoRedoManager;
 func _ready() -> void:
 	m_previousState = captureCurrentState();
 	set_process(Engine.is_editor_hint());
+	if (!Engine.is_editor_hint()): return;
 	
 	var dummy_ep = EditorPlugin.new()
 	m_undoredo = dummy_ep.get_undo_redo();

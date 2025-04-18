@@ -1,8 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://dnfslepljw6c2"]
+[gd_scene load_steps=8 format=3 uid="uid://dnfslepljw6c2"]
 
-[ext_resource type="PackedScene" uid="uid://dvfg7eq1a00s2" path="res://Assets/Player/player.tscn" id="1_s41d2"]
-[ext_resource type="Script" uid="uid://cjq6hjyjcbwxh" path="res://Levels/minimap.gd" id="2_gtnvv"]
-[ext_resource type="PackedScene" uid="uid://be0lmohgkj2qu" path="res://Assets/Timer/timer_text.tscn" id="3_wav5q"]
+[ext_resource type="PackedScene" uid="uid://dvfg7eq1a00s2" path="res://Assets/Entities/Player/player.tscn" id="1_s41d2"]
+[ext_resource type="Script" uid="uid://cjq6hjyjcbwxh" path="res://Assets/Minimap/minimap.gd" id="2_gtnvv"]
+[ext_resource type="PackedScene" uid="uid://b0bxqku4pcb01" path="res://Assets/Timer/timer_text.tscn" id="3_wav5q"]
+[ext_resource type="PackedScene" uid="uid://b2ljwpxvaib4e" path="res://Assets/LevelBase/level_base.tscn" id="4_xto7t"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_s41d2"]
 sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
@@ -16,10 +17,6 @@ background_mode = 2
 sky = SubResource("Sky_gtnvv")
 tonemap_mode = 2
 
-[sub_resource type="PlaneMesh" id="PlaneMesh_s41d2"]
-
-[sub_resource type="BoxMesh" id="BoxMesh_s41d2"]
-
 [node name="Level" type="Node3D"]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
@@ -31,14 +28,6 @@ shadow_enabled = true
 
 [node name="Player" parent="." instance=ExtResource("1_s41d2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00156617, 0.00160146, -0.000651836)
-
-[node name="Floor" type="MeshInstance3D" parent="."]
-transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, -1, 0)
-mesh = SubResource("PlaneMesh_s41d2")
-
-[node name="TestObject" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, -3.5)
-mesh = SubResource("BoxMesh_s41d2")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -53,16 +42,20 @@ offset_bottom = 120.0
 grow_horizontal = 0
 stretch = true
 
-[node name="SubViewport" type="SubViewport" parent="CanvasLayer/SubViewportContainer" node_paths=PackedStringArray("camera_node", "player_node")]
+[node name="SubViewport" type="SubViewport" parent="CanvasLayer/SubViewportContainer" node_paths=PackedStringArray("camera_node")]
 handle_input_locally = false
 size = Vector2i(100, 100)
 render_target_update_mode = 4
 script = ExtResource("2_gtnvv")
 camera_node = NodePath("MapCamera3D")
-player_node = NodePath("../../../Player")
 
 [node name="MapCamera3D" type="Camera3D" parent="CanvasLayer/SubViewportContainer/SubViewport"]
 projection = 1
 size = 10.0
 
 [node name="TimerText" parent="CanvasLayer" instance=ExtResource("3_wav5q")]
+
+[node name="LevelBase" parent="." instance=ExtResource("4_xto7t")]
+data = {
+"cells": PackedInt32Array(0, 65530, 1, 65535, 65530, 1, 65535, 65531, 1, 65535, 65532, 1, 0, 65532, 1, 0, 65533, 1, 0, 65534, 1, 0, 65535, 1, 0, 0, 1, 0, 1, 1, 0, 2, 1, 0, 3, 1, 0, 4, 1, 1, 4, 1, 1, 5, 1, 2, 4, 1, 2, 3, 1, 2, 2, 1, 1, 1, 1, 1, 0, 1, 1, 65535, 1, 1, 65534, 1, 1, 65533, 1, 65535, 2, 1, 65535, 3, 1, 65535, 4, 1, 65535, 0, 1, 65535, 65535, 1, 65535, 65534, 1, 65535, 65533, 1, 65535, 1, 1, 1, 2, 1, 1, 3, 1, 2, 1, 1, 2, 0, 1, 3, 2, 1, 3, 1, 1, 0, 65531, 1, 2, 65535, 1, 3, 0, 1, 2, 65534, 1, 1, 65532, 1, 3, 65535, 1, 4, 0, 1, 4, 1, 1, 4, 65535, 1, 5, 1, 1, 5, 0, 1, 6, 0, 1, 6, 65535, 1, 5, 65535, 1, 65534, 0, 1, 65533, 0, 1, 65533, 1, 1, 65534, 2, 1, 65534, 65535, 1, 65534, 1, 1, 65534, 3, 1, 65535, 5, 1, 65535, 6, 1, 65534, 6, 1, 65535, 7, 1, 0, 6, 1, 0, 5, 1, 65534, 7, 1, 65532, 0, 1, 65531, 0, 1, 65530, 0, 1, 65529, 0, 1, 65528, 0, 1, 65528, 1, 1, 65530, 1, 1, 65531, 1, 1, 65532, 1, 1, 65532, 65535, 1, 65529, 1, 1, 65528, 2, 1, 65528, 3, 1, 65528, 4, 1, 65529, 4, 1, 65529, 5, 1, 65529, 3, 1, 65529, 2, 1, 65528, 5, 1, 1, 65530, 0, 0, 65529, 0, 65534, 65530, 0, 65535, 65529, 0, 65534, 65531, 1, 65534, 65532, 1, 2, 5, 0, 1, 6, 0, 3, 4, 0, 3, 3, 0, 2, 65533, 0, 65534, 4, 0, 65534, 65534, 1, 65534, 65533, 1, 4, 2, 0, 1, 65531, 1, 3, 65534, 0, 2, 65532, 0, 4, 65534, 0, 6, 1, 0, 5, 2, 0, 7, 0, 0, 7, 65535, 0, 6, 65534, 0, 5, 65534, 0, 65533, 65535, 1, 65533, 2, 0, 65533, 3, 0, 65534, 5, 0, 65533, 6, 0, 0, 7, 0, 65535, 8, 0, 65533, 7, 0, 65534, 8, 0, 65531, 65535, 0, 65530, 65535, 0, 65529, 65535, 0, 65527, 0, 0, 65528, 65535, 0, 65527, 1, 0, 65530, 2, 0, 65531, 2, 0, 65532, 2, 0, 65532, 65534, 1, 65527, 2, 0, 65527, 3, 0, 65527, 4, 0, 65530, 4, 0, 65530, 5, 0, 65529, 6, 0, 65530, 3, 0, 65527, 5, 0, 65528, 6, 0, 65533, 65533, 1, 65533, 65534, 1, 65532, 65533, 1, 65533, 65532, 1, 65532, 65532, 1, 65533, 65531, 1, 65531, 65532, 1, 65531, 65533, 1, 65531, 65534, 1, 65532, 65531, 0, 65533, 65530, 0, 65530, 65532, 0, 65531, 65531, 0, 65530, 65533, 0, 65530, 65534, 0, 2, 65531, 1, 3, 65531, 1, 4, 65531, 1, 2, 65530, 0, 3, 65532, 0, 3, 65530, 0, 5, 65531, 0, 4, 65532, 0, 4, 65530, 0)
+}
