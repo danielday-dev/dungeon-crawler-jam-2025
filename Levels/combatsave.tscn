@@ -1,14 +1,13 @@
-[gd_scene load_steps=16 format=3 uid="uid://dnfslepljw6c2"]
+[gd_scene load_steps=15 format=3 uid="uid://dnfslepljw6c2"]
 
-[ext_resource type="Script" path="res://Scripts/combat.gd" id="1_k1dr4"]
-[ext_resource type="Script" uid="uid://te48db7j1h6v" path="res://Assets/Timer/timer.gd" id="2_2unxs"]
-[ext_resource type="AudioStream" uid="uid://com5h5y7sevbb" path="res://Countdown_Tick.wav" id="3_8nw3r"]
-[ext_resource type="PackedScene" uid="uid://b4tx0jgg7b4pn" path="res://Assets/Gun/gun.tscn" id="4_pyban"]
-[ext_resource type="Script" uid="uid://cpsda0ux512xh" path="res://Assets/Player/player.gd" id="5_k1dr4"]
-[ext_resource type="Script" path="res://Levels/minimap.gd" id="6_abpda"]
-[ext_resource type="SpriteFrames" uid="uid://d32lrvp3xi3t3" path="res://Assets/Enemies/FleshHulk/flesh_hulk_sprite_frames.tres" id="7_pexy1"]
-[ext_resource type="Texture2D" uid="uid://b5qmfdecqiriy" path="res://Sprites/weak_spot.png" id="8_2f6in"]
-[ext_resource type="Script" path="res://Scripts/weak_spot.gd" id="9_7v56p"]
+[ext_resource type="Script" uid="uid://7jbtp3hsw3gc" path="res://Assets/Combat/combat.gd" id="1_k1dr4"]
+[ext_resource type="PackedScene" uid="uid://dhuuv1e6aff8j" path="res://Assets/Timer/heartbeat.tscn" id="2_cnvjw"]
+[ext_resource type="PackedScene" uid="uid://b4tx0jgg7b4pn" path="res://Assets/Combat/Gun/gun.tscn" id="4_pyban"]
+[ext_resource type="Script" uid="uid://cpsda0ux512xh" path="res://Assets/Entities/Player/player.gd" id="5_k1dr4"]
+[ext_resource type="Script" uid="uid://cjq6hjyjcbwxh" path="res://Assets/Minimap/minimap.gd" id="6_abpda"]
+[ext_resource type="SpriteFrames" uid="uid://d32lrvp3xi3t3" path="res://Assets/Entities/Enemies/FleshHulk/flesh_hulk_sprite_frames.tres" id="7_pexy1"]
+[ext_resource type="Texture2D" uid="uid://b5qmfdecqiriy" path="res://Assets/Entities/Enemies/Sprites/weak_spot.png" id="8_2f6in"]
+[ext_resource type="Script" uid="uid://b7uf43us23rwd" path="res://Assets/Combat/weak_spot.gd" id="9_7v56p"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_s41d2"]
 sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
@@ -32,15 +31,10 @@ tonemap_mode = 2
 
 [node name="Combat" type="Node" parent="." node_paths=PackedStringArray("timer")]
 script = ExtResource("1_k1dr4")
-timer = NodePath("../Heartbeat")
+timer = NodePath("")
 
-[node name="Heartbeat" type="Node" parent="." node_paths=PackedStringArray("_text")]
-script = ExtResource("2_2unxs")
+[node name="Heartbeat" parent="." node_paths=PackedStringArray("_text") instance=ExtResource("2_cnvjw")]
 _text = NodePath("../CanvasLayer/TimerText")
-
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Heartbeat"]
-stream = ExtResource("3_8nw3r")
-volume_db = -30.0
 
 [node name="Gun" parent="." instance=ExtResource("4_pyban")]
 
@@ -87,13 +81,12 @@ offset_bottom = 120.0
 grow_horizontal = 0
 stretch = true
 
-[node name="SubViewport" type="SubViewport" parent="CanvasLayer/SubViewportContainer" node_paths=PackedStringArray("camera_node", "player_node")]
+[node name="SubViewport" type="SubViewport" parent="CanvasLayer/SubViewportContainer" node_paths=PackedStringArray("camera_node")]
 handle_input_locally = false
 size = Vector2i(100, 100)
 render_target_update_mode = 4
 script = ExtResource("6_abpda")
 camera_node = NodePath("MapCamera3D")
-player_node = NodePath("../../../Player")
 
 [node name="MapCamera3D" type="Camera3D" parent="CanvasLayer/SubViewportContainer/SubViewport"]
 projection = 1
@@ -133,5 +126,3 @@ billboard = 2
 double_sided = false
 texture = ExtResource("8_2f6in")
 script = ExtResource("9_7v56p")
-
-[connection signal="heart_beat" from="Heartbeat" to="Combat" method="_on_heartbeat_heart_beat"]

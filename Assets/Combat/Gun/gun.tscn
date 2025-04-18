@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://b4tx0jgg7b4pn"]
+
+[ext_resource type="Script" uid="uid://dq7y2s3shi1qg" path="res://Assets/Combat/Gun/gun.gd" id="1_lo5tv"]
+[ext_resource type="SpriteFrames" uid="uid://dqcvgwukge7b3" path="res://Assets/Combat/Gun/gun_sprite_frames.tres" id="2_7owna"]
+
+[node name="Gun" type="Node2D"]
+script = ExtResource("1_lo5tv")
+
+[node name="Gun" type="AnimatedSprite2D" parent="."]
+sprite_frames = ExtResource("2_7owna")
+centered = false
+
+[node name="Cursor" type="Polygon2D" parent="."]
+position = Vector2(360, 180)
+scale = Vector2(1.04167, 1.21053)
+polygon = PackedVector2Array(0, 9.91304, -11.52, 0, 0, -9.91304, 11.52, 0)
