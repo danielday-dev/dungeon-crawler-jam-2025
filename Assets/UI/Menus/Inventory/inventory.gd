@@ -35,13 +35,13 @@ func removeItem(removedItem : Item) -> void:
 	_removeItemFromDisplay(removedItem)
 	
 func _removeItemFromDisplay(removedItem : Item) -> void:
-	#BUG its queue freeing the same object twice somehow??
 	#BUG currently just removes the first instance of the item, rather than the one you click,
 	#    could maybe use an item ID system or something but this works for now.
 	var children = displayList.get_children()
 	for i in range(0, len(children)):
 		var child = displayList.get_child(i)
 		if child.getItemType() == removedItem:
+			displayList.remove_child(child)
 			child.queue_free()
 			return;
 				
