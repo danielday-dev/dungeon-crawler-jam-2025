@@ -35,6 +35,8 @@ func _ready() -> void:
 	update_turn_visuals();
 
 func _process(delta : float) -> void:
+	if (!GameState.in_state(GameState.State.Exploring)): delta = 0;
+
 	if (update_position(delta) || update_turn(delta)): 
 		return;
 
@@ -43,13 +45,13 @@ func _process(delta : float) -> void:
 #########################################################################
 # Input handling.
 
-func poll_inputs() -> void:
-	assert(false, "Please override `poll_inputs()` in the derived script.");
-
 func handle_input() -> void:
 	poll_inputs();
 	if (handle_turn_input()): return;	
 	if (handle_position_input()): return;
+
+func poll_inputs() -> void:
+	assert(false, "Please override `poll_inputs()` in the derived script.");
 	
 func handle_position_input() -> bool:
 	if (m_input_move.y != 0):
@@ -82,7 +84,7 @@ func is_moving() -> bool:
 func update_position(delta : float) -> bool:
 	if (!is_moving()): return false;
 	
-	if (m_positionLerpTime > 0):
+	if (m_positionLerpTime > 0.0):
 		m_positionLerp = move_toward(m_positionLerp, 1.0, delta / m_positionLerpTime);
 	else: 
 		m_positionLerp = 1.0;
@@ -110,7 +112,7 @@ func is_turning() -> bool:
 func update_turn(delta : float) -> bool:
 	if (!is_turning()): return false;
 	
-	if (m_turnLerpTime):
+	if (m_turnLerpTime > 0.0):
 		m_turnLerp = move_toward(m_turnLerp, 1.0, delta / m_turnLerpTime);
 	else:
 		m_turnLerp = 1.0;
