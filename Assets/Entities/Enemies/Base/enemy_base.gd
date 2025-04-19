@@ -28,8 +28,6 @@ func poll_inputs() -> void:
 
 func check_player_overlap() -> void:
 	if (Player.s_instance.m_positionTarget == m_positionTarget):
-		#print("COMBAT ENTERED");
-		#queue_free();
 		GameState.s_instance.set_state(GameState.State.Combat);
 
 func updatePath() -> void:
