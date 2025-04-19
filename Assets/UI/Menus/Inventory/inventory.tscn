@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://bsd4yf63bx4y"]
+[gd_scene load_steps=3 format=3 uid="uid://bsd4yf63bx4y"]
 
 [ext_resource type="Script" uid="uid://ca5psf35xyiqs" path="res://Assets/UI/Menus/Inventory/inventory.gd" id="1_5a86m"]
+[ext_resource type="PackedScene" uid="uid://cfqem12udux7d" path="res://Assets/UI/Menus/Inventory/itemInstance.tscn" id="2_4bbf1"]
 
 [node name="Inventory" type="Control"]
 layout_mode = 3
@@ -24,4 +25,7 @@ grow_horizontal = 0
 grow_vertical = 2
 
 [node name="DisplayList" type="VBoxContainer" parent="ScrollContainer"]
+layout_mode = 2
+
+[node name="ItemInstance" parent="ScrollContainer/DisplayList" instance=ExtResource("2_4bbf1")]
 layout_mode = 2
