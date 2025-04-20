@@ -1,12 +1,14 @@
-[gd_scene load_steps=14 format=3 uid="uid://dfpb0wfedv01w"]
+[gd_scene load_steps=17 format=3 uid="uid://dfpb0wfedv01w"]
 
 [ext_resource type="PackedScene" uid="uid://b1xlm6mmsi7mp" path="res://Assets/Combat/combat.tscn" id="1_cnvjw"]
 [ext_resource type="PackedScene" uid="uid://dhuuv1e6aff8j" path="res://Assets/Timer/heartbeat.tscn" id="2_cnvjw"]
+[ext_resource type="Script" uid="uid://u0wfc675b7mn" path="res://Levels/player_combat.gd" id="3_cnvjw"]
 [ext_resource type="PackedScene" uid="uid://ddffnt81wfxkt" path="res://Assets/Combat/TargetingRing/targeting_ring_3d.tscn" id="5_0m6j6"]
 [ext_resource type="Texture2D" uid="uid://cdvwudv845sho" path="res://Assets/Combat/Sprites/Arrow.png" id="5_cnvjw"]
 [ext_resource type="Script" uid="uid://cjq6hjyjcbwxh" path="res://Assets/Minimap/minimap.gd" id="6_abpda"]
 [ext_resource type="PackedScene" uid="uid://cgnac65wpahfa" path="res://Assets/Combat/WeakPoint/weak_spot.tscn" id="7_k1dr4"]
 [ext_resource type="SpriteFrames" uid="uid://d32lrvp3xi3t3" path="res://Assets/Entities/Enemies/FleshHulk/flesh_hulk_sprite_frames.tres" id="7_pexy1"]
+[ext_resource type="Script" uid="uid://b7uf43us23rwd" path="res://Assets/Combat/weak_spot.gd" id="8_k1dr4"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_s41d2"]
 sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
@@ -20,6 +22,10 @@ background_mode = 2
 sky = SubResource("Sky_gtnvv")
 tonemap_mode = 2
 
+[sub_resource type="Curve" id="Curve_cnvjw"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.265957, 1), 0.990169, 0.990169, 0, 0, Vector2(0.75, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_61lih"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_s41d2"]
@@ -31,7 +37,6 @@ tonemap_mode = 2
 [node name="Combat" parent="." node_paths=PackedStringArray("_timer", "_attackRing", "_weakSpotsParent", "_attackIndicatorsParent") instance=ExtResource("1_cnvjw")]
 _timer = NodePath("../Heartbeat")
 _attackRing = NodePath("../TargetingRing3D")
-_attackPattern = Array[int]([0, 1, 0, 1, 2, 3])
 _weakSpotsParent = NodePath("../Enemy/WeakSpots")
 _attackIndicatorsParent = NodePath("../CanvasLayer/AttackIndicators")
 
@@ -45,8 +50,11 @@ environment = SubResource("Environment_wav5q")
 transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 0, 0)
 shadow_enabled = true
 
-[node name="Player" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00156617, 0.00160146, -0.000651836)
+[node name="Player" type="Node3D" parent="." node_paths=PackedStringArray("testEnemy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00156617, 0.00160146, 0.999348)
+script = ExtResource("3_cnvjw")
+testEnemy = NodePath("../Enemy")
+dodgeCurve = SubResource("Curve_cnvjw")
 
 [node name="Head" type="Node3D" parent="Player"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.378963, 0)
@@ -178,6 +186,7 @@ sprite_frames = ExtResource("7_pexy1")
 
 [node name="WeakSpots" type="Node3D" parent="Enemy"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.296308)
+script = ExtResource("8_k1dr4")
 
 [node name="WeakSpot" parent="Enemy/WeakSpots" instance=ExtResource("7_k1dr4")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.468908, 0)
@@ -194,6 +203,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.296582, -0.588476, 0)
 [node name="WeakSpot5" parent="Enemy/WeakSpots" instance=ExtResource("7_k1dr4")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.293828, -0.588476, 0)
 
+[connection signal="dodge" from="Combat" to="Player" method="_on_combat_dodge"]
 [connection signal="weak_spot_reveal" from="Combat" to="TargetingRing3D" method="_on_combat_weak_spot_reveal"]
 [connection signal="heart_beat" from="Heartbeat" to="Combat" method="_on_heartbeat_heart_beat"]
 [connection signal="heart_beat" from="Heartbeat" to="TargetingRing3D" method="_on_heartbeat_heart_beat"]

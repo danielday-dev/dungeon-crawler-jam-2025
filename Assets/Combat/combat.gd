@@ -20,6 +20,7 @@ var cam: Camera3D;
 @export var _attackIndicatorsParent: Node;
 
 signal weak_spot_reveal;
+signal dodge(direction: Vector2);
 
 # dict of attack directions and the corresponding input direction that allows you to dodge successfully
 # (the reverse of the attack dir)
@@ -102,6 +103,8 @@ func _process(delta: float) -> void:
 		_time_since_dodge_input += delta;
 		if (_time_since_dodge_input < _dodge_input_window):
 			return;
+		
+		dodge.emit(_dodge_input_direction);
 		
 		# reset stored dodge input, prevent dodging again until small cooldown period done
 		_dodge_input_direction = Vector2.ZERO;
