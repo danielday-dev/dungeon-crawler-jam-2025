@@ -94,6 +94,7 @@ text = "TIMER"
 horizontal_alignment = 1
 
 [node name="AttackIndicators" parent="CanvasLayer" instance=ExtResource("9_dvejp")]
+offset_bottom = -68.0
 
 [node name="LevelBase" parent="." instance=ExtResource("4_xto7t")]
 data = {
