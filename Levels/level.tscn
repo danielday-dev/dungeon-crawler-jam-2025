@@ -20,6 +20,8 @@
 [ext_resource type="PackedScene" uid="uid://drlxohf1bvfr6" path="res://Assets/Interactables/Door/door.tscn" id="12_dvejp"]
 [ext_resource type="PackedScene" uid="uid://dtl4rkwgod38y" path="res://Assets/Entities/Enemies/Chicken/chicken_zombie.tscn" id="16_vmy0u"]
 [ext_resource type="PackedScene" uid="uid://bgb515ef7rdxx" path="res://Assets/Interactables/Pill/pill.tscn" id="20_jmcc3"]
+[ext_resource type="PackedScene" uid="uid://bfucyhn0nsm1f" path="res://Assets/Interactables/End/end.tscn" id="18_lybtp"]
+[ext_resource type="PackedScene" uid="uid://cihktxjiydix5" path="res://Assets/Clear/clear_node.tscn" id="19_8hqpc"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_s41d2"]
 sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
@@ -259,3 +261,10 @@ transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -29.5,
 [node name="Pill14" parent="Interactables" instance=ExtResource("20_jmcc3")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -37.5, 0.5, -3.5)
 m_item = 9
+
+[node name="End" parent="Interactables" instance=ExtResource("18_lybtp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19.5, 0.5, -16.5)
+
+[node name="ClearNode" parent="Interactables/End" instance=ExtResource("19_8hqpc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.243568, -0.5, 0.226585)
+m_clearRange = 4.97

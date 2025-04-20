@@ -15,7 +15,7 @@ func _init() -> void:
 	s_level = self;
 
 func _ready() -> void:
-	super();
+	#super();
 	if (!Engine.is_editor_hint()):
 		loadMeshLibrary();
 		return;
@@ -61,11 +61,11 @@ func cellChanged(pos : Vector3i) -> void:
 	if (changedCells.is_empty()):
 		return;
 	
-	m_undoredo.create_action("__AddedWallsToFloor", UndoRedo.MERGE_ALL);
-	for targetPos : Vector3i in changedCells.keys():
-		m_undoredo.add_undo_method(self, "set_wall", targetPos, changedCells.get(targetPos)[0]);
-		m_undoredo.add_do_method(self, "set_wall", targetPos, changedCells.get(targetPos)[1]);
-	m_undoredo.commit_action();
+	#m_undoredo.create_action("__AddedWallsToFloor", UndoRedo.MERGE_ALL);
+	#for targetPos : Vector3i in changedCells.keys():
+		#m_undoredo.add_undo_method(self, "set_wall", targetPos, changedCells.get(targetPos)[0]);
+		#m_undoredo.add_do_method(self, "set_wall", targetPos, changedCells.get(targetPos)[1]);
+	#m_undoredo.commit_action();
 
 func set_wall(pos : Vector3i, item : int):
 	set_cell_item(pos, item);
