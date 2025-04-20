@@ -1,4 +1,6 @@
-extends Node3D
+extends Node
+class_name Combat;
+static var s_instance : Combat = null;
 
 enum PlayerState { NONE, DODGE, DODGE_COOLDOWN };
 enum Action { ATK_START, ATK_END, WEAK_SPOT, WAIT };
@@ -7,7 +9,7 @@ enum Action { ATK_START, ATK_END, WEAK_SPOT, WAIT };
 var cam: Camera3D;
 
 @export var _timer: Heartbeat;
-@export var _attackRing: Sprite3D;
+@export var _attackRing: TargetingRing;
 @export var _attackPattern: Array[Action] = [
 	Action.ATK_START,
 	Action.ATK_END,
@@ -16,7 +18,6 @@ var cam: Camera3D;
 	Action.WEAK_SPOT,
 	Action.WAIT
 ];
-@export var _weakSpotsParent: Node3D;
 @export var _attackIndicatorsParent: Node;
 
 signal weak_spot_reveal;
@@ -39,14 +40,46 @@ var _dodge_input_lockout_time: float = 1.0; # can't dodge again for this many se
 var _check_click_hit_weak_spot: bool = false;
 var _shoot_input_window: float = 0.25;
 
+var m_initializedCombat : bool = false;
+var m_enemy : EnemyBase = null;
+
+func _init() -> void:
+	if (s_instance != null):
+		queue_free();
+		return;
+	s_instance = self;
+
 func _ready() -> void:
-	_weak_spots.assign(_weakSpotsParent.find_children("*", "Sprite3D", true, false));
 	_attack_indicators.assign(_attackIndicatorsParent.find_children("*", "TextureRect", true, false));
 	cam = get_viewport().get_camera_3d();
+	
+func _start_combat(enemy : EnemyBase):
+	if (enemy == null): return;
+	m_enemy = enemy;
+	_weak_spots.assign(m_enemy.m_weakSpotsParent.find_children("*", "Sprite3D", true, false));
 	
 	_set_visible_indicators();
 	_set_visible_weak_spots();
 	_gun._set_combat_active(true);
+	$Gun.visible = true;
+	
+	_timer.heart_beat.connect(_on_heartbeat_heart_beat);
+	_timer.heart_beat.connect(_attackRing._on_heartbeat_heart_beat);
+	weak_spot_reveal.connect(_attackRing._on_combat_weak_spot_reveal);
+	
+	m_initializedCombat = true;
+	
+func _clear_combat():
+	_weak_spots.clear();
+	
+	_set_visible_indicators();
+	_set_visible_weak_spots();
+	_gun._set_combat_active(false);
+	$Gun.visible = false;
+	
+	_timer.heart_beat.disconnect(_on_heartbeat_heart_beat);
+	_timer.heart_beat.disconnect(_attackRing._on_heartbeat_heart_beat);
+	weak_spot_reveal.disconnect(_attackRing._on_combat_weak_spot_reveal);
 	
 func _unhandled_input(event) -> void:
 	if event is not InputEventMouseButton:
@@ -66,7 +99,7 @@ func _physics_process(delta):
 		return;
 	
 	_check_click_hit_weak_spot = false;
-	var space_state = get_world_3d().direct_space_state;
+	var space_state = get_tree().root.get_world_3d().direct_space_state;
 	var mousepos = get_viewport().get_mouse_position();
 
 	var origin = cam.project_ray_origin(mousepos);
@@ -88,6 +121,13 @@ func _physics_process(delta):
 		print_debug("Shot too early...")
 	
 func _process(delta: float) -> void:
+	if (!GameState.in_state(GameState.State.Combat)): 
+		if (!GameState.in_state(GameState.State.Transitioning) && m_initializedCombat):
+			_clear_combat();
+			m_initializedCombat = false;
+		return;
+	if (!m_initializedCombat): return;
+	
 	# if action needs processing, process it
 	if _current_action != {} && !_processed_action:
 		match _current_action["Type"]:
@@ -113,6 +153,10 @@ func _process(delta: float) -> void:
 		if (_time_since_dodge_input > _dodge_input_window + _dodge_input_lockout_time):
 			_time_since_dodge_input = 0.0;
 			_player_state = PlayerState.NONE;
+
+
+
+
 
 func _wait() -> void:
 	print_debug("WAITING");

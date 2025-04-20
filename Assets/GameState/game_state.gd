@@ -74,10 +74,13 @@ func update_state_visuals() -> void:
 		m_stateTransitionLerp if (m_stateTarget == State.Combat) else \
 		(1.0 - m_stateTransitionLerp) if (m_stateCurrent) else \
 		0.0;
-	combatRange *= m_combatRange;
-	combatRange *= combatRange;
+	
+	var combatExpo := combatRange * m_combatRange;
+	combatExpo *= combatExpo;
 	
 	s_material.set_shader_parameter("u_combatCenter", Player.s_instance.global_position);
-	s_material.set_shader_parameter("u_combatRange", combatRange);
+	s_material.set_shader_parameter("u_combatRange", combatExpo);
+
+	Player.s_instance.camera.global_transform = Player.s_instance.cameraTransform.global_transform.interpolate_with(Combat.s_instance.m_enemy.m_cameraParent.global_transform, combatRange);
 
 #########################################################################

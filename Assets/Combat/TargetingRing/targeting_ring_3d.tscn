@@ -4,6 +4,7 @@
 [ext_resource type="Script" uid="uid://bxhojjmw7quel" path="res://Assets/Combat/TargetingRing/targeting_ring.gd" id="2_26u6o"]
 
 [node name="TargetingRing3D" type="Sprite3D"]
+pixel_size = 0.004
 billboard = 2
 texture_filter = 0
 texture = ExtResource("1_5jdew")
