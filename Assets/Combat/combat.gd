@@ -61,6 +61,7 @@ func _start_combat(enemy : EnemyBase):
 	_set_visible_indicators();
 	_set_visible_weak_spots();
 	_gun._set_combat_active(true);
+	$Gun.visible = true;
 	
 	_timer.heart_beat.connect(_on_heartbeat_heart_beat);
 	_timer.heart_beat.connect(_attackRing._on_heartbeat_heart_beat);
@@ -74,6 +75,7 @@ func _clear_combat():
 	_set_visible_indicators();
 	_set_visible_weak_spots();
 	_gun._set_combat_active(false);
+	$Gun.visible = false;
 	
 	_timer.heart_beat.disconnect(_on_heartbeat_heart_beat);
 	_timer.heart_beat.disconnect(_attackRing._on_heartbeat_heart_beat);

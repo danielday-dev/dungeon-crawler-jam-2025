@@ -7,3 +7,4 @@
 script = ExtResource("1_4ptbt")
 
 [node name="Gun" parent="." instance=ExtResource("2_6ud8e")]
+visible = false

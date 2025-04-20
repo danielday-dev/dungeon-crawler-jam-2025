@@ -15,20 +15,25 @@ texture = ExtResource("2_6w2wm")
 
 [node name="WeakSpot" parent="WeakSpots" index="0" instance=ExtResource("3_xwbsm")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.188, 0.12)
+visible = false
 pixel_size = 0.004
 
 [node name="WeakSpot2" parent="WeakSpots" index="1" instance=ExtResource("3_xwbsm")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.247, 0, 0.12)
+visible = false
 pixel_size = 0.004
 
 [node name="WeakSpot3" parent="WeakSpots" index="2" instance=ExtResource("3_xwbsm")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.233, 0, 0.12)
+visible = false
 pixel_size = 0.004
 
 [node name="WeakSpot4" parent="WeakSpots" index="3" instance=ExtResource("3_xwbsm")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.119, -0.235, 0.12)
+visible = false
 pixel_size = 0.004
 
 [node name="WeakSpot5" parent="WeakSpots" index="4" instance=ExtResource("3_xwbsm")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.118, -0.235, 0.12)
+visible = false
 pixel_size = 0.004
