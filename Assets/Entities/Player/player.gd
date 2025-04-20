@@ -21,6 +21,8 @@ func _init() -> void:
 		queue_free();
 		return;
 	s_instance = self;
+	
+	m_turnCurrent = TurnDirection.South;
 
 func _ready() -> void:
 	super();

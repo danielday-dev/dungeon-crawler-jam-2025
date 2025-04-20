@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://hr5pvy331ima"]
+[gd_scene load_steps=22 format=3 uid="uid://hr5pvy331ima"]
 
 [ext_resource type="PackedScene" uid="uid://dvfg7eq1a00s2" path="res://Assets/Entities/Player/player.tscn" id="1_s41d2"]
 [ext_resource type="PackedScene" uid="uid://bcjht1rl7pdq2" path="res://Assets/GameState/game_state.tscn" id="1_t80w2"]
