@@ -44,4 +44,7 @@ func interact() -> void:
 func interact_internal() -> void:
 	assert(false, "Please override `interact_internal()` in the derived script.");
 
+func reset_tile() -> void:
+	var pos : Vector2i = Vector2i(floorf(position.x), floorf(position.z));
+	Level.s_level.set_cell_item(Vector3i(pos.x, 0, pos.y), Level.s_level.m_floorIndex);
 #########################################################################
