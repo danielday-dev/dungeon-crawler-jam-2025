@@ -1,0 +1,57 @@
+[gd_scene format=3 uid="uid://bg6ml1wbwark8"]
+
+[node name="ColorRect" type="ColorRect"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.099986, 0.099986, 0.099986, 1)
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -274.0
+offset_right = 283.0
+offset_bottom = 301.0
+grow_horizontal = 2
+text = "Thanks for playing!
+-------------------------------------------------------------
+hastily made by 3 bozos"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CreditsBox" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.094
+anchor_bottom = 0.289
+offset_left = 289.0
+offset_top = 238.0
+offset_right = 288.84
+offset_bottom = 237.96
+alignment = 1
+
+[node name="CreditsLabel" type="Label" parent="CreditsBox"]
+layout_mode = 2
+text = "Credits:"
+
+[node name="DanCredit" type="LinkButton" parent="CreditsBox"]
+layout_mode = 2
+text = "Dan"
+underline = 1
+uri = "https://hjmw.itch.io/"
+
+[node name="JordanCredit" type="LinkButton" parent="CreditsBox"]
+layout_mode = 2
+text = "Jordan"
+underline = 1
+uri = "https://jawdandev.itch.io/"
+
+[node name="BethCredit" type="LinkButton" parent="CreditsBox"]
+layout_mode = 2
+text = "Beth"
+underline = 1
+uri = "https://befany.itch.io/"
