@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=3 uid="uid://cfqem12udux7d"]
+
+[ext_resource type="Script" uid="uid://0el2vv1outnr" path="res://Assets/UI/Menus/Inventory/itemInstance.gd" id="1_baoyg"]
+
+[node name="ItemInstance" type="HBoxContainer"]
+script = ExtResource("1_baoyg")
+
+[node name="UseButton" type="Button" parent="."]
+layout_mode = 2
+text = "Use"
+
+[node name="ItemLabel" type="Label" parent="."]
+layout_mode = 2
+
+[connection signal="pressed" from="UseButton" to="." method="_on_use_button_pressed"]
