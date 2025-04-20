@@ -1,8 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://hr5pvy331ima"]
+[gd_scene load_steps=10 format=3 uid="uid://hr5pvy331ima"]
 
 [ext_resource type="PackedScene" uid="uid://dvfg7eq1a00s2" path="res://Assets/Entities/Player/player.tscn" id="1_s41d2"]
 [ext_resource type="PackedScene" uid="uid://dhuuv1e6aff8j" path="res://Assets/Timer/heartbeat.tscn" id="1_xto7t"]
 [ext_resource type="Script" uid="uid://cjq6hjyjcbwxh" path="res://Assets/Minimap/minimap.gd" id="2_gtnvv"]
+[ext_resource type="PackedScene" uid="uid://cfvsqr2pwndsw" path="res://Assets/Clear/clear_manager.tscn" id="2_t80w2"]
 [ext_resource type="PackedScene" uid="uid://b2ljwpxvaib4e" path="res://Assets/LevelBase/level_base.tscn" id="4_xto7t"]
 [ext_resource type="PackedScene" uid="uid://b7va83v27o3r5" path="res://Assets/Entities/Enemies/FleshHulk/flesh_hulk.tscn" id="5_uhyyw"]
 
@@ -22,6 +23,8 @@ tonemap_mode = 2
 
 [node name="Heartbeat" parent="." node_paths=PackedStringArray("_text") instance=ExtResource("1_xto7t")]
 _text = NodePath("../CanvasLayer/TimerText")
+
+[node name="ClearManager" parent="." instance=ExtResource("2_t80w2")]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_wav5q")
@@ -78,3 +81,4 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 0)
 
 [node name="EnemyBase2" parent="." instance=ExtResource("5_uhyyw")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 0, 5.96339)
+m_turnLerpTime = 0.5

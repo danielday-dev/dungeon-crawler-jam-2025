@@ -1,20 +1,7 @@
-[gd_resource type="ShaderMaterial" load_steps=6 format=3 uid="uid://bwx3im3l3c5sm"]
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://bwx3im3l3c5sm"]
 
 [ext_resource type="Shader" uid="uid://0vkpihrwrx6j" path="res://Assets/LevelBase/Shader/level.gdshader" id="1_1oq3a"]
-[ext_resource type="Texture2D" uid="uid://uxjmevcw8bmq" path="res://Assets/LevelBase/Textures/ShipNormal.png" id="2_uhpeq"]
-[ext_resource type="Texture2D" uid="uid://c7tuxdsjpfdur" path="res://Assets/LevelBase/Textures/Ship.png" id="2_vwgwr"]
-[ext_resource type="Texture2D" uid="uid://dbm1gorgkpufd" path="res://Assets/LevelBase/Textures/Meat.png" id="4_aseao"]
-[ext_resource type="Texture2D" uid="uid://clnvmlwhgmkuc" path="res://Assets/LevelBase/Textures/MeatNormal.png" id="4_h67nx"]
 
 [resource]
 render_priority = 0
 shader = ExtResource("1_1oq3a")
-shader_parameter/u_clearCount = 0
-shader_parameter/u_clearCenters = PackedVector3Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
-shader_parameter/u_clearRange = PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
-shader_parameter/u_combatCenter = Vector3(0, 0, 0)
-shader_parameter/u_combatRange = 0.0
-shader_parameter/u_meatTexture = ExtResource("4_aseao")
-shader_parameter/u_meatNormal = ExtResource("4_h67nx")
-shader_parameter/u_clearTexture = ExtResource("2_vwgwr")
-shader_parameter/u_clearNormal = ExtResource("2_uhpeq")

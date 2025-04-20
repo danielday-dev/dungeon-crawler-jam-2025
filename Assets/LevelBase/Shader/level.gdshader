@@ -29,13 +29,13 @@ void fragment() {
 		maxBlend = max(maxBlend, u_clearRange[i] - dist);
 	}
 	maxBlend = clamp(maxBlend, 0, 1);
-	
+
 	vec3 baseColor = mix(texture(u_meatTexture, UV).rgb, texture(u_clearTexture, UV).rgb, maxBlend);
 	vec3 normal = mix(texture(u_meatNormal, UV).xyz, texture(u_clearNormal, UV).xyz, maxBlend);
-	
+
 	float combatDist = distance(v_worldPos, u_combatCenter);
 	f_combatMix = clamp(u_combatRange - combatDist, 0.0, 1.0);
-	
+
 	ALBEDO.rgb = mix(baseColor, texture(u_combatTexture, UV).rgb, f_combatMix);
 	NORMAL_MAP = mix(normal, vec3(0, 0, 0), f_combatMix);
 }
