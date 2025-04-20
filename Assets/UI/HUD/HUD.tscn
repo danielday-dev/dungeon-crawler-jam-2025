@@ -35,7 +35,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-split_offset = 260
+split_offset = 280
 
 [node name="Button" type="Button" parent="VSplitContainer"]
 layout_mode = 2
@@ -82,13 +82,13 @@ scroll_active = false
 
 [node name="HSplitContainer" type="HSplitContainer" parent="VSplitContainer/ColorRect/HSplitContainer/HSplitContainer"]
 layout_mode = 2
-split_offset = 150
+split_offset = 100
 
 [node name="TextureRect" type="TextureRect" parent="VSplitContainer/ColorRect/HSplitContainer/HSplitContainer/HSplitContainer"]
 layout_mode = 2
 texture = ExtResource("1_hfs2l")
 expand_mode = 2
-stretch_mode = 4
+stretch_mode = 6
 
 [node name="Inventory" parent="VSplitContainer/ColorRect/HSplitContainer/HSplitContainer/HSplitContainer" instance=ExtResource("3_brvsv")]
 layout_mode = 2
