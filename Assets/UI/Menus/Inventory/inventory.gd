@@ -83,9 +83,11 @@ func useItem(item : Item):
 			removeItem(Item.Digoxin)
 		Item.BoneMarrow:
 			#increase max health
+			Player.s_instance.m_max_health += 1;
 			removeItem(Item.BoneMarrow)
 		Item.Blood:
 			#increase health
+			Player.s_instance.m_health = Player.s_instance.m_max_health
 			removeItem(Item.Blood)
 		Item.Steroids:
 			Player.s_instance.damage += 0.5
