@@ -9,6 +9,7 @@ signal on_turn_end;
 
 var m_input_move : Vector2i = Vector2i.ZERO;
 var m_input_turn : float = 0.0;
+@export var m_health: float = 3.0;
 
 #########################################################################
 # Internal.

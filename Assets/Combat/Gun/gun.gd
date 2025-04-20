@@ -25,6 +25,7 @@ func _process(delta: float) -> void:
 	_cursor.position = mouse_pos;
 	
 func _set_combat_active(active: bool = false) -> void:
+	visible = active;
 	_combat_active = active;
 	_cursor.visible = active;
 	Input.mouse_mode = Input.MOUSE_MODE_HIDDEN if active else Input.MOUSE_MODE_VISIBLE;

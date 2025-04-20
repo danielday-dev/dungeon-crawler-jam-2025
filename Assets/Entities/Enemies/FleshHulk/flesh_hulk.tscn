@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://bucvtxmwqthrd" path="res://Assets/Entities/Enemies/FleshHulk/fleshguy.png" id="2_6w2wm"]
 [ext_resource type="PackedScene" uid="uid://cgnac65wpahfa" path="res://Assets/Combat/WeakPoint/weak_spot.tscn" id="3_xwbsm"]
 
-[node name="EnemyBase2" node_paths=PackedStringArray("m_weakSpotsParent") instance=ExtResource("1_6nyh7")]
+[node name="FleshHulk" node_paths=PackedStringArray("m_weakSpotsParent") instance=ExtResource("1_6nyh7")]
 m_weakSpotsParent = NodePath("WeakSpots")
 
 [node name="EnemySprite" parent="." index="0"]
