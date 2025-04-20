@@ -12,4 +12,5 @@ func _process(delta: float) -> void:
 		set_process(false);
 		
 func interact_internal() -> void:
-	if (!Inventory.s_instance.currentItems.has(m_item)): return;
+	if (!Inventory.s_instance.currentItems.has(m_item)):
+		m_isInteractable = true;

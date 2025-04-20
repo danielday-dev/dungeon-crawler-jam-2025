@@ -73,10 +73,12 @@ func useItem(item : Item):
 	#BUG it would have been nice to have this as a superclass that has a use() template,
 	#but its easier to redirect all button presses to here for now. If we had lots of items
 	#this would need fixing
+	
+	var outputString : String = "";
 	match item:
 		#need to replace the prints with message popups
 		Item.Digoxin:
-			print("Lowered your heartbeat a bit.. ")
+			outputString = ("Lowered your heartbeat a bit.. ")
 			removeItem(Item.Digoxin)
 		Item.BoneMarrow:
 			#increase max health
@@ -87,11 +89,14 @@ func useItem(item : Item):
 		Item.Steroids:
 			removeItem(Item.Steroids)
 		Item.DoorKey1:
-			print("Nothing happens, maybe you shouldve interacted with the door instead? You're always like this")
+			outputString = ("Nothing happens, maybe you shouldve interacted with the door instead? You're always like this")
 		Item.DoorKey2:
-			print("Nothing happens, you know to press the doors, cmon")
+			outputString = ("Nothing happens, you know to press the doors, cmon")
 		Item.NotAnItem, _:
-			print("Nothing Happens.")
+			outputString = ("Nothing Happens.")
+		
+	print(outputString);
+	TextPopup.s_instance.set_popup_text(outputString);
 
 func _init() -> void:
 	if (s_instance != null):
