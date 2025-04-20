@@ -1,0 +1,14 @@
+[gd_scene load_steps=4 format=3 uid="uid://c8y2as0h745ng"]
+
+[ext_resource type="PackedScene" uid="uid://usvucj200gro" path="res://Assets/Interactables/Base/interactable_base.tscn" id="1_a1gkg"]
+[ext_resource type="Script" uid="uid://bslvwd6uxyice" path="res://Assets/Interactables/Vent/vent.gd" id="2_a1gkg"]
+[ext_resource type="Texture2D" uid="uid://dfpba06e53lwi" path="res://Assets/Interactables/Vent/vent.png" id="3_63iwl"]
+
+[node name="Vent" instance=ExtResource("1_a1gkg")]
+script = ExtResource("2_a1gkg")
+m_openRate = 180.0
+
+[node name="Sprite" parent="." index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0.5)
+offset = Vector2(0, 128)
+texture = ExtResource("3_63iwl")

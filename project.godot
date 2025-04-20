@@ -25,6 +25,7 @@ window/stretch/mode="canvas_items"
 folder_colors={
 "res://Assets/": "pink",
 "res://Assets/Entities/": "teal",
+"res://Assets/Interactables/": "blue",
 "res://Levels/": "blue",
 "res://Scripts/": "yellow"
 }

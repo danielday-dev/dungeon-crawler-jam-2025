@@ -1,0 +1,17 @@
+[gd_scene load_steps=5 format=3 uid="uid://bipdemnub3ll6"]
+
+[ext_resource type="PackedScene" uid="uid://usvucj200gro" path="res://Assets/Interactables/Base/interactable_base.tscn" id="1_ystvu"]
+[ext_resource type="Texture2D" uid="uid://buca7u8oyqc7g" path="res://Assets/Interactables/Computer/computer.png" id="2_gmlxs"]
+[ext_resource type="Script" uid="uid://cv1ip0n8g40u3" path="res://Assets/Interactables/Computer/computer.gd" id="2_rkmiy"]
+[ext_resource type="PackedScene" uid="uid://cihktxjiydix5" path="res://Assets/Clear/clear_node.tscn" id="4_keb55"]
+
+[node name="Computer" instance=ExtResource("1_ystvu")]
+script = ExtResource("2_rkmiy")
+m_targetClearRange = 7.0
+m_targetClearRate = 0.9
+
+[node name="Sprite" parent="." index="0"]
+texture = ExtResource("2_gmlxs")
+
+[node name="ClearNode" parent="." index="1" instance=ExtResource("4_keb55")]
+m_clearRange = 1.5
