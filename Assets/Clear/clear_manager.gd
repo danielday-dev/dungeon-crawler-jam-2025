@@ -13,11 +13,13 @@ var m_updated : bool = false;
 
 #########################################################################
 
-func _ready() -> void:
-	if (s_instance != null && s_instance != self):
+func _init() -> void:
+	if (s_instance != null && !Engine.is_editor_hint()):
 		queue_free();
 		return;
 	s_instance = self;
+	
+func _ready() -> void:
 	set_process(true);
 	
 	child_order_changed.connect(update_material);

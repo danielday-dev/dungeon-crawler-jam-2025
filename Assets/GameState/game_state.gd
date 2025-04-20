@@ -26,7 +26,7 @@ var m_stateTransitionLerp : float = 0;
 # Process.
 
 func _init() -> void:
-	if (s_instance != null):
+	if (s_instance != null && !Engine.is_editor_hint()):
 		queue_free();
 		return;
 	s_instance = self;
