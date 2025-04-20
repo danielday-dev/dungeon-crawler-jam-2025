@@ -1,0 +1,13 @@
+[gd_scene load_steps=4 format=3 uid="uid://drlxohf1bvfr6"]
+
+[ext_resource type="PackedScene" uid="uid://usvucj200gro" path="res://Assets/Interactables/Base/interactable_base.tscn" id="1_n070p"]
+[ext_resource type="Script" uid="uid://be0jw5asinft" path="res://Assets/Interactables/Door/door.gd" id="2_yf08t"]
+[ext_resource type="Texture2D" uid="uid://cp25reyjodmkh" path="res://Assets/Interactables/Door/door.png" id="3_yf08t"]
+
+[node name="Door" instance=ExtResource("1_n070p")]
+script = ExtResource("2_yf08t")
+m_openRate = 1.6
+m_item = 0
+
+[node name="Sprite" parent="." index="0"]
+texture = ExtResource("3_yf08t")
