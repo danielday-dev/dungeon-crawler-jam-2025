@@ -5,7 +5,7 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	var interactable : InteractableBase = get_interactable();
-	visible = interactable != null;
+	visible = interactable != null && interactable.is_interactable();
 
 func get_interactable() -> InteractableBase:
 	if (Player.s_instance == null): return null
