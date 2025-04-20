@@ -1,13 +1,12 @@
-[gd_scene load_steps=15 format=3 uid="uid://dnfslepljw6c2"]
+[gd_scene load_steps=14 format=3 uid="uid://dfpb0wfedv01w"]
 
 [ext_resource type="Script" uid="uid://7jbtp3hsw3gc" path="res://Assets/Combat/combat.gd" id="1_k1dr4"]
 [ext_resource type="PackedScene" uid="uid://dhuuv1e6aff8j" path="res://Assets/Timer/heartbeat.tscn" id="2_cnvjw"]
 [ext_resource type="PackedScene" uid="uid://b4tx0jgg7b4pn" path="res://Assets/Combat/Gun/gun.tscn" id="4_pyban"]
-[ext_resource type="Script" uid="uid://cpsda0ux512xh" path="res://Assets/Entities/Player/player.gd" id="5_k1dr4"]
+[ext_resource type="Texture2D" uid="uid://cdvwudv845sho" path="res://Assets/Combat/Sprites/Arrow.png" id="5_cnvjw"]
 [ext_resource type="Script" uid="uid://cjq6hjyjcbwxh" path="res://Assets/Minimap/minimap.gd" id="6_abpda"]
+[ext_resource type="PackedScene" uid="uid://cgnac65wpahfa" path="res://Assets/Combat/WeakPoint/weak_spot.tscn" id="7_k1dr4"]
 [ext_resource type="SpriteFrames" uid="uid://d32lrvp3xi3t3" path="res://Assets/Entities/Enemies/FleshHulk/flesh_hulk_sprite_frames.tres" id="7_pexy1"]
-[ext_resource type="Texture2D" uid="uid://b5qmfdecqiriy" path="res://Assets/Entities/Enemies/Sprites/weak_spot.png" id="8_2f6in"]
-[ext_resource type="Script" uid="uid://b7uf43us23rwd" path="res://Assets/Combat/weak_spot.gd" id="9_7v56p"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_s41d2"]
 sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
@@ -29,8 +28,11 @@ tonemap_mode = 2
 
 [node name="Level" type="Node3D"]
 
-[node name="Combat" type="Node" parent="."]
+[node name="Combat" type="Node3D" parent="." node_paths=PackedStringArray("_weakSpotsParent", "_attackIndicators", "timer")]
 script = ExtResource("1_k1dr4")
+_weakSpotsParent = NodePath("../Enemy/WeakSpots")
+_attackIndicators = [NodePath("../CanvasLayer/AttackIndicators/AttackUp"), NodePath("../CanvasLayer/AttackIndicators/AttackRight"), NodePath("../CanvasLayer/AttackIndicators/AttackDown"), NodePath("../CanvasLayer/AttackIndicators/AttackLeft")]
+timer = NodePath("../Heartbeat")
 
 [node name="Heartbeat" parent="." node_paths=PackedStringArray("_text") instance=ExtResource("2_cnvjw")]
 _text = NodePath("../CanvasLayer/TimerText")
@@ -46,10 +48,9 @@ shadow_enabled = true
 
 [node name="Player" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00156617, 0.00160146, -0.000651836)
-script = ExtResource("5_k1dr4")
 
 [node name="Head" type="Node3D" parent="Player"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.378963, 0)
 
 [node name="FirstPersonCamera" type="Camera3D" parent="Player/Head"]
 
@@ -102,26 +103,82 @@ grow_horizontal = 2
 text = "TIMER"
 horizontal_alignment = 1
 
-[node name="Enemy" type="AnimatedSprite3D" parent="."]
-transform = Transform3D(0.75, 0, 0, 0, 0.75, 0, 0, 0, 0.75, -2, -0.3, 0)
-billboard = 2
+[node name="AttackIndicators" type="Node" parent="CanvasLayer"]
+
+[node name="AttackUp" type="TextureRect" parent="CanvasLayer/AttackIndicators"]
+visible = false
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_top = 80.0
+offset_right = 20.0
+offset_bottom = 120.0
+grow_horizontal = 2
+rotation = -1.5708
+size_flags_horizontal = 8
+texture = ExtResource("5_cnvjw")
+
+[node name="AttackRight" type="TextureRect" parent="CanvasLayer/AttackIndicators"]
+visible = false
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -60.0
+offset_top = -20.0
+offset_right = -20.0
+offset_bottom = 20.0
+grow_horizontal = 0
+grow_vertical = 2
+rotation = -6.28319
+size_flags_horizontal = 8
+texture = ExtResource("5_cnvjw")
+
+[node name="AttackDown" type="TextureRect" parent="CanvasLayer/AttackIndicators"]
+visible = false
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 28.0
+offset_top = -60.0
+offset_right = 68.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 0
+rotation = 1.5708
+size_flags_horizontal = 8
+texture = ExtResource("5_cnvjw")
+
+[node name="AttackLeft" type="TextureRect" parent="CanvasLayer/AttackIndicators"]
+visible = false
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 20.0
+offset_top = -20.0
+offset_right = 60.0
+offset_bottom = 20.0
+grow_vertical = 2
+size_flags_horizontal = 8
+texture = ExtResource("5_cnvjw")
+flip_h = true
+
+[node name="Enemy" type="AnimatedSprite3D" parent="." groups=["WeakSpot"]]
+transform = Transform3D(0.75, 0, 0, 0, 0.75, 0, 0, 0, 0.75, 0.100052, -0.0975392, -1.88379)
 texture_filter = 0
 sprite_frames = ExtResource("7_pexy1")
 
 [node name="WeakSpots" type="Node3D" parent="Enemy"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.2)
-visible = false
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.296308)
 
-[node name="WeakSpot1" type="Sprite3D" parent="Enemy/WeakSpots"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.013, 0.283, 0)
-billboard = 2
-double_sided = false
-texture = ExtResource("8_2f6in")
-script = ExtResource("9_7v56p")
+[node name="WeakSpot" parent="Enemy/WeakSpots" instance=ExtResource("7_k1dr4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.468908, 0)
 
-[node name="WeakSpot2" type="Sprite3D" parent="Enemy/WeakSpots"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.641515, -0.202674, 0)
-billboard = 2
-double_sided = false
-texture = ExtResource("8_2f6in")
-script = ExtResource("9_7v56p")
+[node name="WeakSpot2" parent="Enemy/WeakSpots" instance=ExtResource("7_k1dr4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.617466, 0, 0)
+
+[connection signal="heart_beat" from="Heartbeat" to="Combat" method="_on_heartbeat_heart_beat"]
