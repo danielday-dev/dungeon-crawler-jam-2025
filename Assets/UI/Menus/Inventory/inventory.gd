@@ -79,6 +79,7 @@ func useItem(item : Item):
 		#need to replace the prints with message popups
 		Item.Digoxin:
 			outputString = ("Lowered your heartbeat a bit.. ")
+			Player.s_instance.timer._bpm = Player.s_instance.timer._base_bpm - 40;
 			removeItem(Item.Digoxin)
 		Item.BoneMarrow:
 			#increase max health
@@ -87,6 +88,7 @@ func useItem(item : Item):
 			#increase health
 			removeItem(Item.Blood)
 		Item.Steroids:
+			Player.s_instance.damage += 0.5
 			removeItem(Item.Steroids)
 		Item.DoorKey1:
 			outputString = ("Nothing happens, maybe you shouldve interacted with the door instead? You're always like this")

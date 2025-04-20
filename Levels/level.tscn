@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://hr5pvy331ima"]
+[gd_scene load_steps=25 format=3 uid="uid://hr5pvy331ima"]
 
 [ext_resource type="PackedScene" uid="uid://dvfg7eq1a00s2" path="res://Assets/Entities/Player/player.tscn" id="1_s41d2"]
 [ext_resource type="PackedScene" uid="uid://bcjht1rl7pdq2" path="res://Assets/GameState/game_state.tscn" id="1_t80w2"]
@@ -10,13 +10,16 @@
 [ext_resource type="PackedScene" uid="uid://b2ljwpxvaib4e" path="res://Assets/LevelBase/level_base.tscn" id="4_xto7t"]
 [ext_resource type="PackedScene" uid="uid://ddffnt81wfxkt" path="res://Assets/Combat/TargetingRing/targeting_ring_3d.tscn" id="5_eabcg"]
 [ext_resource type="PackedScene" uid="uid://b7va83v27o3r5" path="res://Assets/Entities/Enemies/FleshHulk/flesh_hulk.tscn" id="5_uhyyw"]
+[ext_resource type="Curve" uid="uid://cimeglonmwebj" path="res://Assets/Combat/dodge_curve.tres" id="7_3hgmi"]
+[ext_resource type="Curve" uid="uid://cke3svavh05ce" path="res://Assets/Combat/take_hit_curve.tres" id="8_xsqsu"]
 [ext_resource type="PackedScene" uid="uid://ch76egjwfoxtw" path="res://Assets/Combat/AttackIndicators/attack_indicators.tscn" id="9_dvejp"]
 [ext_resource type="PackedScene" uid="uid://r3bgg2rb0fuc" path="res://Assets/Interactables/Key/key.tscn" id="9_eabcg"]
 [ext_resource type="PackedScene" uid="uid://bipdemnub3ll6" path="res://Assets/Interactables/Computer/computer.tscn" id="9_t2u7g"]
 [ext_resource type="PackedScene" uid="uid://cd5qup2fglss" path="res://Assets/Popup/popup.tscn" id="10_vmy0u"]
 [ext_resource type="PackedScene" uid="uid://c8y2as0h745ng" path="res://Assets/Interactables/Vent/vent.tscn" id="10_vx8ih"]
 [ext_resource type="PackedScene" uid="uid://drlxohf1bvfr6" path="res://Assets/Interactables/Door/door.tscn" id="12_dvejp"]
-[ext_resource type="PackedScene" uid="uid://bgb515ef7rdxx" path="res://Assets/Interactables/Pill/pill.tscn" id="16_vmy0u"]
+[ext_resource type="PackedScene" uid="uid://dtl4rkwgod38y" path="res://Assets/Entities/Enemies/Chicken/chicken_zombie.tscn" id="16_vmy0u"]
+[ext_resource type="PackedScene" uid="uid://bgb515ef7rdxx" path="res://Assets/Interactables/Pill/pill.tscn" id="20_jmcc3"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_s41d2"]
 sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
@@ -57,7 +60,10 @@ _timer = NodePath("../../Heartbeat")
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_wav5q")
 
-[node name="Player" parent="." instance=ExtResource("1_s41d2")]
+[node name="Player" parent="." node_paths=PackedStringArray("timer") instance=ExtResource("1_s41d2")]
+dodgeCurve = ExtResource("7_3hgmi")
+timer = NodePath("../Heartbeat")
+takeHitCurve = ExtResource("8_xsqsu")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -101,6 +107,9 @@ horizontal_alignment = 1
 offset_bottom = -68.0
 
 [node name="Popup" parent="CanvasLayer" instance=ExtResource("10_vmy0u")]
+
+[node name="Chicken" parent="CanvasLayer" instance=ExtResource("16_vmy0u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.56132, 0.5, 4.48848)
 
 [node name="LevelBase" parent="." instance=ExtResource("4_xto7t")]
 data = {
@@ -167,19 +176,18 @@ transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -41.5,
 [node name="Computer5" parent="Interactables" instance=ExtResource("9_t2u7g")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -7.5, 0.5, -0.5)
 
-[node name="Pill" parent="Interactables" instance=ExtResource("16_vmy0u")]
+[node name="Pill" parent="Interactables" instance=ExtResource("20_jmcc3")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.5, 0.5, -1.5)
-m_item = 6
 
-[node name="Pill2" parent="Interactables" instance=ExtResource("16_vmy0u")]
+[node name="Pill2" parent="Interactables" instance=ExtResource("20_jmcc3")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.5, 0.5, -0.5)
 m_item = 7
 
-[node name="Pill3" parent="Interactables" instance=ExtResource("16_vmy0u")]
+[node name="Pill3" parent="Interactables" instance=ExtResource("20_jmcc3")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15.5, 0.5, -1.5)
 m_item = 8
 
-[node name="Pill4" parent="Interactables" instance=ExtResource("16_vmy0u")]
+[node name="Pill4" parent="Interactables" instance=ExtResource("20_jmcc3")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -36.5, 0.5, 1.5)
 m_item = 9
 
@@ -190,11 +198,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -35.5, 0.5, 3.5)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -39.5, 0.5, 12.5)
 m_item = 4
 
-[node name="Pill5" parent="Interactables" instance=ExtResource("16_vmy0u")]
+[node name="Pill5" parent="Interactables" instance=ExtResource("20_jmcc3")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -41.5, 0.5, 20.5)
 m_item = 7
 
-[node name="Pill6" parent="Interactables" instance=ExtResource("16_vmy0u")]
+[node name="Pill6" parent="Interactables" instance=ExtResource("20_jmcc3")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -41.5, 0.5, 19.5)
 m_item = 8
 
@@ -218,37 +226,36 @@ transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -15.5,
 [node name="Computer8" parent="Interactables" instance=ExtResource("9_t2u7g")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -16.5, 0.5, 22.5)
 
-[node name="Pill7" parent="Interactables" instance=ExtResource("16_vmy0u")]
+[node name="Pill7" parent="Interactables" instance=ExtResource("20_jmcc3")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -31.5, 0.5, 7.5)
 m_item = 9
 
-[node name="Pill8" parent="Interactables" instance=ExtResource("16_vmy0u")]
+[node name="Pill8" parent="Interactables" instance=ExtResource("20_jmcc3")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -29.5, 0.5, 13.5)
-m_item = 6
 
-[node name="Pill9" parent="Interactables" instance=ExtResource("16_vmy0u")]
+[node name="Pill9" parent="Interactables" instance=ExtResource("20_jmcc3")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.5, 0.5, 9.5)
 m_item = 9
 
-[node name="Pill10" parent="Interactables" instance=ExtResource("16_vmy0u")]
+[node name="Pill10" parent="Interactables" instance=ExtResource("20_jmcc3")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.5, 0.5, 11.5)
 m_item = 9
 
-[node name="Pill11" parent="Interactables" instance=ExtResource("16_vmy0u")]
+[node name="Pill11" parent="Interactables" instance=ExtResource("20_jmcc3")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.5, 0.5, 18.5)
 m_item = 7
 
-[node name="Pill12" parent="Interactables" instance=ExtResource("16_vmy0u")]
+[node name="Pill12" parent="Interactables" instance=ExtResource("20_jmcc3")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25.5, 0.5, 14.5)
 m_item = 7
 
-[node name="Pill13" parent="Interactables" instance=ExtResource("16_vmy0u")]
+[node name="Pill13" parent="Interactables" instance=ExtResource("20_jmcc3")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -26.5, 0.5, 14.5)
 m_item = 8
 
 [node name="Vent3" parent="Interactables" instance=ExtResource("10_vx8ih")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -29.5, 0.5, -3.5)
 
-[node name="Pill14" parent="Interactables" instance=ExtResource("16_vmy0u")]
+[node name="Pill14" parent="Interactables" instance=ExtResource("20_jmcc3")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -37.5, 0.5, -3.5)
 m_item = 9

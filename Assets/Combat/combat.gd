@@ -132,7 +132,7 @@ func _physics_process(delta):
 	#on hit;
 	print_debug("Hit weak spot")
 	_gun._shoot();
-	m_enemy.m_health -= 1;
+	m_enemy.m_health -= Player.s_instance.damage;
 	enemy_hit.emit();
 	if (m_enemy.m_health <= 0):
 		GameState.s_instance.set_state(GameState.State.Exploring);
@@ -197,6 +197,12 @@ func _attack_hit() -> void:
 		print_debug("Attack dodged");
 	else:
 		print_debug("Attack hit");
+		Player.s_instance.timer._bpm += 10;
+		Player.s_instance.m_health -= 1;
+		if (Player.s_instance.m_health <= 0):
+			print_debug("DEAD")
+			get_tree().change_scene_to_file("res://Assets/UI/Menus/End/End.tscn")
+			#TODO: DIE
 		player_hit.emit();
 	_set_visible_indicators();
 	_processed_action = true;
@@ -227,6 +233,9 @@ func _set_visible_indicators(active: int = -1) -> void:
 func _on_heartbeat_heart_beat() -> void:
 	var nextActionType: Action = _attackPattern.get(_attack_index);
 	var attackDirection: Vector2;
+	
+	if (Player.s_instance.timer._bpm > Player.s_instance.timer._base_bpm):
+		Player.s_instance.timer._bpm -= 10.0;
 	
 	# carry over direction if it's been set (so we don't lose it going from ATK_START to ATK_END)
 	if _current_action.get("Direction", Vector2.ZERO) != Vector2.ZERO:

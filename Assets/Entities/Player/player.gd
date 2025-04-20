@@ -8,12 +8,13 @@ static var s_instance : Player = null;
 @onready var camera : Camera3D = $Head/CameraTransform/FirstPersonCamera
 @onready var map_cam_position : Node3D = $Head/MapCameraPos
 @export var dodgeCurve: Curve;
+@export var timer: Heartbeat;
 
 var m_cam_original_pos: Vector3;
 var m_dodge_lerp: float = 0.0;
 var m_dodging_direction: Vector2 = Vector2.ZERO;
 var m_dodge_distance: float = 0.25;
-
+var damage = 1.0;
 
 
 func _init() -> void:
