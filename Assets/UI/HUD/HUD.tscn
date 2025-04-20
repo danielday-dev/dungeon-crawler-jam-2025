@@ -1,9 +1,9 @@
 [gd_scene load_steps=5 format=3 uid="uid://b15m2c5f4ov54"]
 
 [ext_resource type="Script" uid="uid://dnpap6hfh2pjb" path="res://Assets/UI/HUD/HUD.gd" id="1_brvsv"]
-[ext_resource type="Texture2D" uid="uid://cnvmh2xhw1b34" path="res://Assets/UI/Menus/MainMenu/heart.png" id="1_hfs2l"]
 [ext_resource type="Script" uid="uid://c2q1xfqncekp2" path="res://Assets/UI/HUD/interact_button.gd" id="2_ncpyi"]
 [ext_resource type="PackedScene" uid="uid://bsd4yf63bx4y" path="res://Assets/UI/Menus/Inventory/inventory.tscn" id="3_brvsv"]
+[ext_resource type="Texture2D" uid="uid://b2epu3dpkwd00" path="res://Assets/UI/HUD/heart.png" id="3_ncpyi"]
 
 [node name="HUD" type="Control"]
 layout_mode = 3
@@ -96,12 +96,12 @@ scroll_active = false
 
 [node name="HSplitContainer" type="HSplitContainer" parent="VSplitContainer/ColorRect/HSplitContainer/HSplitContainer"]
 layout_mode = 2
-split_offset = 100
+split_offset = 75
 dragging_enabled = false
 
 [node name="TextureRect" type="TextureRect" parent="VSplitContainer/ColorRect/HSplitContainer/HSplitContainer/HSplitContainer"]
 layout_mode = 2
-texture = ExtResource("1_hfs2l")
+texture = ExtResource("3_ncpyi")
 expand_mode = 2
 stretch_mode = 6
 
