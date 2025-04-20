@@ -3,10 +3,9 @@
 [ext_resource type="Script" uid="uid://te48db7j1h6v" path="res://Assets/Timer/timer.gd" id="1_hsret"]
 [ext_resource type="AudioStream" uid="uid://com5h5y7sevbb" path="res://Assets/Timer/Countdown_Tick.wav" id="2_6grpj"]
 
-[node name="Heartbeat" type="Node" node_paths=PackedStringArray("_text")]
+[node name="Heartbeat" type="Node"]
 script = ExtResource("1_hsret")
-_text = NodePath("")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("2_6grpj")
-volume_db = -30.0
+volume_db = -10.0
