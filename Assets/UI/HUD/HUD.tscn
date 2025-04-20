@@ -1,0 +1,96 @@
+[gd_scene load_steps=4 format=3 uid="uid://b15m2c5f4ov54"]
+
+[ext_resource type="Script" uid="uid://dnpap6hfh2pjb" path="res://Assets/UI/HUD/HUD.gd" id="1_brvsv"]
+[ext_resource type="Texture2D" uid="uid://cnvmh2xhw1b34" path="res://Assets/UI/Menus/MainMenu/heart.png" id="1_hfs2l"]
+[ext_resource type="PackedScene" uid="uid://bsd4yf63bx4y" path="res://Assets/UI/Menus/Inventory/inventory.tscn" id="3_brvsv"]
+
+[node name="HUD" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_brvsv")
+
+[node name="AreaNameLabel" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -70.0
+offset_top = -11.5
+offset_right = 70.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Engineering Ducts"
+
+[node name="VSplitContainer" type="VSplitContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+split_offset = 260
+
+[node name="Button" type="Button" parent="VSplitContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+text = "Interact"
+
+[node name="ColorRect" type="ColorRect" parent="VSplitContainer"]
+layout_mode = 2
+color = Color(0.118581, 0.118581, 0.118581, 1)
+
+[node name="HSplitContainer" type="HSplitContainer" parent="VSplitContainer/ColorRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+split_offset = 100
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VSplitContainer/ColorRect/HSplitContainer"]
+layout_mode = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="VSplitContainer/ColorRect/HSplitContainer/VBoxContainer"]
+layout_mode = 2
+text = "ATK: 20"
+fit_content = true
+
+[node name="HSplitContainer" type="HSplitContainer" parent="VSplitContainer/ColorRect/HSplitContainer"]
+layout_mode = 2
+split_offset = 160
+
+[node name="VSplitContainer" type="VSplitContainer" parent="VSplitContainer/ColorRect/HSplitContainer/HSplitContainer"]
+layout_mode = 2
+split_offset = 30
+
+[node name="ProgressBar" type="ProgressBar" parent="VSplitContainer/ColorRect/HSplitContainer/HSplitContainer/VSplitContainer"]
+layout_mode = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="VSplitContainer/ColorRect/HSplitContainer/HSplitContainer/VSplitContainer"]
+layout_mode = 2
+text = "10/50"
+scroll_active = false
+
+[node name="HSplitContainer" type="HSplitContainer" parent="VSplitContainer/ColorRect/HSplitContainer/HSplitContainer"]
+layout_mode = 2
+split_offset = 150
+
+[node name="TextureRect" type="TextureRect" parent="VSplitContainer/ColorRect/HSplitContainer/HSplitContainer/HSplitContainer"]
+layout_mode = 2
+texture = ExtResource("1_hfs2l")
+expand_mode = 2
+stretch_mode = 4
+
+[node name="Inventory" parent="VSplitContainer/ColorRect/HSplitContainer/HSplitContainer/HSplitContainer" instance=ExtResource("3_brvsv")]
+layout_mode = 2
+
+[connection signal="mouse_exited" from="VSplitContainer/ColorRect/HSplitContainer/HSplitContainer/HSplitContainer/Inventory" to="." method="_on_inventory_mouse_exited"]
