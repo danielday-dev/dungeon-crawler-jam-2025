@@ -1,16 +1,13 @@
 extends EntityBase
 
-var m_path : Array[PathActions];
 @export var m_engage_path_length_threshold : float = 2.0;
 var m_engage_path_wait : int = 0;
+var m_path : Array[PathActions] = [];
 
 func _ready() -> void:
 	super();
 	#
 	Player.s_instance.on_move_end.connect(updatePath);
-	#
-	Player.s_instance.on_move_end.connect(check_player_overlap);
-	on_move_end.connect(check_player_overlap);
 
 func poll_inputs() -> void:
 	if (is_moving() || is_turning()): return;
@@ -25,10 +22,6 @@ func poll_inputs() -> void:
 			m_input_turn = -1;
 		PathActions.TurnRight: 
 			m_input_turn = 1;
-
-func check_player_overlap() -> void:
-	if (Player.s_instance.m_positionTarget == m_positionTarget):
-		GameState.s_instance.set_state(GameState.State.Combat);
 
 func updatePath() -> void:
 	if (m_engage_path_wait > 0):

@@ -19,7 +19,7 @@ static func itemToText(item : Item):
 var currentItems : Array[Item] = [];
 
 @onready var itemInstance = preload("res://Assets/UI/Menus/Inventory/itemInstance.tscn")
-@onready var displayList = $ScrollContainer/DisplayList;
+@onready var displayList : VBoxContainer = $ScrollContainer/DisplayList;
 func obtainItem(obtainedItem : Item) -> void:
 	currentItems.push_back(obtainedItem)
 	_addItemToDisplay(obtainedItem)
@@ -27,6 +27,7 @@ func obtainItem(obtainedItem : Item) -> void:
 func _addItemToDisplay(obtainedItem : Item) -> void:
 	var newItemInstance = itemInstance.instantiate()
 	#TODO replace with a lookup to get the name?
+	#print(newItemInstance, displayList)
 	displayList.add_child(newItemInstance)
 	newItemInstance.setItemType(obtainedItem)
 	
