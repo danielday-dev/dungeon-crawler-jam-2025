@@ -9,9 +9,9 @@
 [resource]
 render_priority = 0
 shader = ExtResource("1_1oq3a")
-shader_parameter/u_clearCount = 2
-shader_parameter/u_clearCenters = Array[Vector3]([Vector3(0.5, 0.5, -9.5), Vector3(-3.5, 0.5, 7.5)])
-shader_parameter/u_clearRange = Array[float]([1.5, 1.5])
+shader_parameter/u_clearCount = 8
+shader_parameter/u_clearCenters = Array[Vector3]([Vector3(0.5, 0.5, -9.5), Vector3(-3.5, 0.5, 7.5), Vector3(-22.5, 0.5, 11.5), Vector3(-41.5, 0.5, 15.5), Vector3(-7.5, 0.5, -0.5), Vector3(-35.5, 0.5, 3.5), Vector3(-15.5, 0.5, 15.5), Vector3(-16.5, 0.5, 22.5)])
+shader_parameter/u_clearRange = Array[float]([1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5, 1.5])
 shader_parameter/u_combatCenter = Vector3(0, 0, 0)
 shader_parameter/u_combatRange = 0.0
 shader_parameter/u_meatTexture = ExtResource("5_h67nx")
