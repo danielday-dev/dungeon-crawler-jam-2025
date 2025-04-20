@@ -27,7 +27,7 @@ var m_turnLerp : float = 0.0;
 # Core loop.
 
 func _ready() -> void:
-	m_positionCurrent = Vector2i(position.x, position.z);
+	m_positionCurrent = Vector2i(floorf(position.x), floorf(position.z));
 	m_positionTarget = m_positionCurrent;
 	m_turnTarget = m_turnCurrent;
 	
