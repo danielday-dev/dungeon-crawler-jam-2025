@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://7jbtp3hsw3gc" path="res://Assets/Combat/combat.gd" id="1_4ptbt"]
 [ext_resource type="PackedScene" uid="uid://ck77esvcdx6lx" path="res://Assets/Combat/Gun/gun.tscn" id="2_6ud8e"]
 
-[node name="Combat" type="Node3D"]
+[node name="Combat" type="Node"]
 script = ExtResource("1_4ptbt")
 
 [node name="Gun" parent="." instance=ExtResource("2_6ud8e")]

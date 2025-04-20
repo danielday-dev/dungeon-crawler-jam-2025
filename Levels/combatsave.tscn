@@ -2,8 +2,8 @@
 
 [ext_resource type="PackedScene" uid="uid://b1xlm6mmsi7mp" path="res://Assets/Combat/combat.tscn" id="1_cnvjw"]
 [ext_resource type="PackedScene" uid="uid://dhuuv1e6aff8j" path="res://Assets/Timer/heartbeat.tscn" id="2_cnvjw"]
+[ext_resource type="PackedScene" uid="uid://ch76egjwfoxtw" path="res://Assets/Combat/AttackIndicators/attack_indicators.tscn" id="4_0m6j6"]
 [ext_resource type="PackedScene" uid="uid://ddffnt81wfxkt" path="res://Assets/Combat/TargetingRing/targeting_ring_3d.tscn" id="5_0m6j6"]
-[ext_resource type="Texture2D" uid="uid://cdvwudv845sho" path="res://Assets/Combat/Sprites/Arrow.png" id="5_cnvjw"]
 [ext_resource type="Script" uid="uid://cjq6hjyjcbwxh" path="res://Assets/Minimap/minimap.gd" id="6_abpda"]
 [ext_resource type="PackedScene" uid="uid://cgnac65wpahfa" path="res://Assets/Combat/WeakPoint/weak_spot.tscn" id="7_k1dr4"]
 [ext_resource type="SpriteFrames" uid="uid://d32lrvp3xi3t3" path="res://Assets/Entities/Enemies/FleshHulk/flesh_hulk_sprite_frames.tres" id="7_pexy1"]
@@ -28,12 +28,9 @@ tonemap_mode = 2
 
 [node name="Level" type="Node3D"]
 
-[node name="Combat" parent="." node_paths=PackedStringArray("_timer", "_attackRing", "_weakSpotsParent", "_attackIndicatorsParent") instance=ExtResource("1_cnvjw")]
+[node name="Combat" parent="." node_paths=PackedStringArray("_timer", "_attackRing") instance=ExtResource("1_cnvjw")]
 _timer = NodePath("../Heartbeat")
 _attackRing = NodePath("../TargetingRing3D")
-_attackPattern = Array[int]([0, 1, 0, 1, 2, 3])
-_weakSpotsParent = NodePath("../Enemy/WeakSpots")
-_attackIndicatorsParent = NodePath("../CanvasLayer/AttackIndicators")
 
 [node name="Heartbeat" parent="." node_paths=PackedStringArray("_text") instance=ExtResource("2_cnvjw")]
 _text = NodePath("../CanvasLayer/TimerText")
@@ -102,69 +99,7 @@ grow_horizontal = 2
 text = "TIMER"
 horizontal_alignment = 1
 
-[node name="AttackIndicators" type="Node" parent="CanvasLayer"]
-
-[node name="AttackUp" type="TextureRect" parent="CanvasLayer/AttackIndicators"]
-visible = false
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -20.0
-offset_top = 52.0
-offset_right = 20.0
-offset_bottom = 92.0
-grow_horizontal = 2
-rotation = -1.5708
-size_flags_horizontal = 8
-texture = ExtResource("5_cnvjw")
-
-[node name="AttackRight" type="TextureRect" parent="CanvasLayer/AttackIndicators"]
-visible = false
-anchors_preset = 6
-anchor_left = 1.0
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-offset_left = -60.0
-offset_top = -20.0
-offset_right = -20.0
-offset_bottom = 20.0
-grow_horizontal = 0
-grow_vertical = 2
-rotation = -6.28319
-size_flags_horizontal = 8
-texture = ExtResource("5_cnvjw")
-
-[node name="AttackDown" type="TextureRect" parent="CanvasLayer/AttackIndicators"]
-visible = false
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = 28.0
-offset_top = -60.0
-offset_right = 68.0
-offset_bottom = -20.0
-grow_horizontal = 2
-grow_vertical = 0
-rotation = 1.5708
-size_flags_horizontal = 8
-texture = ExtResource("5_cnvjw")
-
-[node name="AttackLeft" type="TextureRect" parent="CanvasLayer/AttackIndicators"]
-visible = false
-anchors_preset = 4
-anchor_top = 0.5
-anchor_bottom = 0.5
-offset_left = 20.0
-offset_top = -20.0
-offset_right = 60.0
-offset_bottom = 20.0
-grow_vertical = 2
-size_flags_horizontal = 8
-texture = ExtResource("5_cnvjw")
-flip_h = true
+[node name="AttackIndicators" parent="CanvasLayer" instance=ExtResource("4_0m6j6")]
 
 [node name="TargetingRing3D" parent="." node_paths=PackedStringArray("_timer") instance=ExtResource("5_0m6j6")]
 transform = Transform3D(0.75, 0, 0, 0, 0.75, 0, 0, 0, 0.75, 0.100052, -0.0975392, -1.46903)

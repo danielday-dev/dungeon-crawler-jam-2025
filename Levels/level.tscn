@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://hr5pvy331ima"]
+[gd_scene load_steps=18 format=3 uid="uid://hr5pvy331ima"]
 
 [ext_resource type="PackedScene" uid="uid://dvfg7eq1a00s2" path="res://Assets/Entities/Player/player.tscn" id="1_s41d2"]
 [ext_resource type="PackedScene" uid="uid://bcjht1rl7pdq2" path="res://Assets/GameState/game_state.tscn" id="1_t80w2"]
@@ -6,8 +6,11 @@
 [ext_resource type="Script" uid="uid://cjq6hjyjcbwxh" path="res://Assets/Minimap/minimap.gd" id="2_gtnvv"]
 [ext_resource type="PackedScene" uid="uid://cfvsqr2pwndsw" path="res://Assets/Clear/clear_manager.tscn" id="2_t80w2"]
 [ext_resource type="PackedScene" uid="uid://b15m2c5f4ov54" path="res://Assets/UI/HUD/HUD.tscn" id="4_8a2b0"]
+[ext_resource type="PackedScene" uid="uid://b1xlm6mmsi7mp" path="res://Assets/Combat/combat.tscn" id="4_ugh17"]
 [ext_resource type="PackedScene" uid="uid://b2ljwpxvaib4e" path="res://Assets/LevelBase/level_base.tscn" id="4_xto7t"]
+[ext_resource type="PackedScene" uid="uid://ddffnt81wfxkt" path="res://Assets/Combat/TargetingRing/targeting_ring_3d.tscn" id="5_eabcg"]
 [ext_resource type="PackedScene" uid="uid://b7va83v27o3r5" path="res://Assets/Entities/Enemies/FleshHulk/flesh_hulk.tscn" id="5_uhyyw"]
+[ext_resource type="PackedScene" uid="uid://ch76egjwfoxtw" path="res://Assets/Combat/AttackIndicators/attack_indicators.tscn" id="9_dvejp"]
 [ext_resource type="PackedScene" uid="uid://bipdemnub3ll6" path="res://Assets/Interactables/Computer/computer.tscn" id="9_t2u7g"]
 [ext_resource type="PackedScene" uid="uid://c8y2as0h745ng" path="res://Assets/Interactables/Vent/vent.tscn" id="10_vx8ih"]
 
@@ -38,6 +41,14 @@ ambient_light_color = Color(0.47, 0.47, 0.47, 1)
 _text = NodePath("../CanvasLayer/TimerText")
 
 [node name="ClearManager" parent="." instance=ExtResource("2_t80w2")]
+
+[node name="Combat" parent="." node_paths=PackedStringArray("_timer", "_attackRing", "_attackIndicatorsParent") instance=ExtResource("4_ugh17")]
+_timer = NodePath("../Heartbeat")
+_attackRing = NodePath("TargetingRing3D")
+_attackIndicatorsParent = NodePath("../CanvasLayer/AttackIndicators")
+
+[node name="TargetingRing3D" parent="Combat" node_paths=PackedStringArray("_timer") instance=ExtResource("5_eabcg")]
+_timer = NodePath("../../Heartbeat")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_wav5q")
@@ -81,6 +92,8 @@ offset_bottom = 40.0
 grow_horizontal = 2
 text = "TIMER"
 horizontal_alignment = 1
+
+[node name="AttackIndicators" parent="CanvasLayer" instance=ExtResource("9_dvejp")]
 
 [node name="LevelBase" parent="." instance=ExtResource("4_xto7t")]
 data = {

@@ -5,9 +5,10 @@
 [sub_resource type="BoxShape3D" id="BoxShape3D_l62ra"]
 size = Vector3(0.8, 1, 0.8)
 
-[node name="EnemyBase" type="Node3D"]
+[node name="EnemyBase" type="Node3D" node_paths=PackedStringArray("m_cameraParent")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0.5, 0.5)
 script = ExtResource("1_l62ra")
+m_cameraParent = NodePath("CameraParent")
 m_turnLerpTime = 0.0
 
 [node name="EnemySprite" type="Sprite3D" parent="."]
@@ -20,3 +21,6 @@ collision_mask = 0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="CombatStartArea"]
 shape = SubResource("BoxShape3D_l62ra")
+
+[node name="CameraParent" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.2)

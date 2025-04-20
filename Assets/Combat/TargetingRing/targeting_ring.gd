@@ -1,4 +1,5 @@
 extends Sprite3D
+class_name TargetingRing;
 
 @export var _timer: Heartbeat;
 

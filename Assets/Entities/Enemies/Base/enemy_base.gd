@@ -1,8 +1,12 @@
 extends EntityBase
+class_name EnemyBase;
 
 @export var m_engage_path_length_threshold : float = 2.0;
 var m_engage_path_wait : int = 0;
 var m_path : Array[PathActions] = [];
+
+@export var m_weakSpotsParent : Node3D;
+@export var m_cameraParent : Node3D;
 
 func _ready() -> void:
 	super();
