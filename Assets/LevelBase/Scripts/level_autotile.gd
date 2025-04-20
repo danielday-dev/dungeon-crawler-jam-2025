@@ -5,6 +5,7 @@ class_name Level;
 static var s_level : Level = null;
 
 var m_floorIndex : int;
+var m_fakeFloorIndex : int;
 var m_wallIndex : int;
 	
 func _init() -> void:
@@ -25,6 +26,7 @@ func _ready() -> void:
 	
 func loadMeshLibrary() -> void:
 	m_floorIndex = mesh_library.find_item_by_name("Floor");
+	m_fakeFloorIndex = mesh_library.find_item_by_name("FAKE_Floor");
 	m_wallIndex = mesh_library.find_item_by_name("Wall");
 
 func cellChanged(pos : Vector3i) -> void:

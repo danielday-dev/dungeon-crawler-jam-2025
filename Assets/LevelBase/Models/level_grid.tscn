@@ -75,3 +75,7 @@ skeleton = NodePath("")
 [node name="Floor" type="MeshInstance3D" parent="."]
 mesh = SubResource("ArrayMesh_7v8e4")
 skeleton = NodePath("")
+
+[node name="FAKE_Floor" type="MeshInstance3D" parent="."]
+mesh = SubResource("ArrayMesh_7v8e4")
+skeleton = NodePath("")
