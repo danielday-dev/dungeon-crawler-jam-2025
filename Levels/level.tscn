@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://hr5pvy331ima"]
+[gd_scene load_steps=12 format=3 uid="uid://hr5pvy331ima"]
 
 [ext_resource type="PackedScene" uid="uid://dvfg7eq1a00s2" path="res://Assets/Entities/Player/player.tscn" id="1_s41d2"]
 [ext_resource type="PackedScene" uid="uid://bcjht1rl7pdq2" path="res://Assets/GameState/game_state.tscn" id="1_t80w2"]
@@ -16,9 +16,15 @@ ground_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
 sky_material = SubResource("ProceduralSkyMaterial_s41d2")
 
 [sub_resource type="Environment" id="Environment_wav5q"]
-background_mode = 2
+background_mode = 1
 sky = SubResource("Sky_gtnvv")
+ambient_light_source = 2
 tonemap_mode = 2
+
+[sub_resource type="Environment" id="Environment_8a2b0"]
+background_mode = 1
+ambient_light_source = 2
+ambient_light_color = Color(0.47, 0.47, 0.47, 1)
 
 [node name="Level" type="Node3D"]
 
@@ -31,10 +37,6 @@ _text = NodePath("../CanvasLayer/TimerText")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_wav5q")
-
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 0, 0)
-shadow_enabled = true
 
 [node name="Player" parent="." instance=ExtResource("1_s41d2")]
 
@@ -59,6 +61,7 @@ script = ExtResource("2_gtnvv")
 camera_node = NodePath("MapCamera3D")
 
 [node name="MapCamera3D" type="Camera3D" parent="CanvasLayer/SubViewportContainer/SubViewport"]
+environment = SubResource("Environment_8a2b0")
 projection = 1
 size = 10.0
 
