@@ -4,6 +4,7 @@ class_name GameState
 #########################################################################
 # API.
 
+@export var s_material : ShaderMaterial;
 static var s_activeState := State.Exploring;
 static var s_instance : GameState;
 
@@ -21,6 +22,8 @@ var m_stateCurrent : State = s_activeState;
 @onready var m_stateTarget : State = m_stateCurrent;
 var m_stateTransitionLerp : float = 0;
 @export var m_stateTransitionTime : float = 0.5;
+
+@export var m_combatRange : float = 5.0;
 
 #########################################################################
 # Process.
@@ -65,7 +68,16 @@ func update_state(delta):
 	m_stateCurrent = m_stateTarget;
 
 func update_state_visuals() -> void:
-	# TODO: Set shaders vars?
-	return;
+	if (Player.s_instance == null): return;
+
+	var combatRange : float = \
+		m_stateTransitionLerp if (m_stateTarget == State.Combat) else \
+		(1.0 - m_stateTransitionLerp) if (m_stateCurrent) else \
+		0.0;
+	combatRange *= m_combatRange;
+	combatRange *= combatRange;
+	
+	s_material.set_shader_parameter("u_combatCenter", Player.s_instance.global_position);
+	s_material.set_shader_parameter("u_combatRange", combatRange);
 
 #########################################################################
