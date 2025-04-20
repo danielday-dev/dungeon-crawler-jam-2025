@@ -37,7 +37,6 @@ transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75
 shadow_enabled = true
 
 [node name="Player" parent="." instance=ExtResource("1_s41d2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00156617, 0.00160146, -0.000651836)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -80,7 +79,7 @@ data = {
 }
 
 [node name="EnemyBase" parent="." instance=ExtResource("5_uhyyw")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.5, 0.5, 0.5)
 
 [node name="EnemyBase2" parent="." instance=ExtResource("5_uhyyw")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 0, 5.96339)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.5, 0.5, 5.5)
