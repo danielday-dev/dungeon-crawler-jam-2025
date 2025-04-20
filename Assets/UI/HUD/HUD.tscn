@@ -1,9 +1,12 @@
-[gd_scene load_steps=5 format=3 uid="uid://b15m2c5f4ov54"]
+[gd_scene load_steps=8 format=3 uid="uid://b15m2c5f4ov54"]
 
 [ext_resource type="Script" uid="uid://dnpap6hfh2pjb" path="res://Assets/UI/HUD/HUD.gd" id="1_brvsv"]
 [ext_resource type="Script" uid="uid://c2q1xfqncekp2" path="res://Assets/UI/HUD/interact_button.gd" id="2_ncpyi"]
+[ext_resource type="Script" uid="uid://gubskwotaal5" path="res://Assets/UI/HUD/progress_bar.gd" id="3_3gux2"]
 [ext_resource type="PackedScene" uid="uid://bsd4yf63bx4y" path="res://Assets/UI/Menus/Inventory/inventory.tscn" id="3_brvsv"]
 [ext_resource type="Texture2D" uid="uid://b2epu3dpkwd00" path="res://Assets/UI/HUD/heart.png" id="3_ncpyi"]
+[ext_resource type="Script" uid="uid://g3v48yvmunmk" path="res://Assets/UI/HUD/rich_text_label_damage.gd" id="3_ynvuc"]
+[ext_resource type="Script" uid="uid://cj5h1mtor7tyn" path="res://Assets/UI/HUD/rich_text_label.gd" id="4_t3xkd"]
 
 [node name="HUD" type="Control"]
 layout_mode = 3
@@ -75,6 +78,7 @@ layout_mode = 2
 layout_mode = 2
 text = "ATK: 20"
 fit_content = true
+script = ExtResource("3_ynvuc")
 
 [node name="HSplitContainer" type="HSplitContainer" parent="VSplitContainer/ColorRect/HSplitContainer"]
 layout_mode = 2
@@ -88,11 +92,13 @@ dragging_enabled = false
 
 [node name="ProgressBar" type="ProgressBar" parent="VSplitContainer/ColorRect/HSplitContainer/HSplitContainer/VSplitContainer"]
 layout_mode = 2
+script = ExtResource("3_3gux2")
 
 [node name="RichTextLabel" type="RichTextLabel" parent="VSplitContainer/ColorRect/HSplitContainer/HSplitContainer/VSplitContainer"]
 layout_mode = 2
 text = "10/50"
 scroll_active = false
+script = ExtResource("4_t3xkd")
 
 [node name="HSplitContainer" type="HSplitContainer" parent="VSplitContainer/ColorRect/HSplitContainer/HSplitContainer"]
 layout_mode = 2

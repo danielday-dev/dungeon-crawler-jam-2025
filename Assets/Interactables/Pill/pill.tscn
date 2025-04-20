@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://bc8vegy6ah47k" path="res://Assets/Interactables/Pill/pill.png" id="2_4d2cs"]
 
 [node name="Pill" instance=ExtResource("1_frx0s")]
+m_item = 6
 
 [node name="Sprite" parent="." index="0"]
 texture = ExtResource("2_4d2cs")
