@@ -28,6 +28,8 @@ func loadMeshLibrary() -> void:
 	m_wallIndex = mesh_library.find_item_by_name("Wall");
 
 func cellChanged(pos : Vector3i) -> void:
+	if (pos.y != 0): return;
+	
 	const checks : Array[Vector3i] = [
 		Vector3i(+1, 0, 0),
 		Vector3i(-1, 0, 0),
