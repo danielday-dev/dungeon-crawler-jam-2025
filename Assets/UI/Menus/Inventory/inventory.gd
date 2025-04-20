@@ -1,5 +1,6 @@
 extends Control
 class_name Inventory
+static var s_instance : Inventory = null;
 
 enum Item{
 	NotAnItem,
@@ -60,6 +61,12 @@ func useItem(item : Item):
 			print("Nothing happens, maybe you shouldve interacted with the door instead? You're always like this")
 		Item.NotAnItem, _:
 			print("Nothing Happens.")
+
+func _init() -> void:
+	if (s_instance != null):
+		queue_free();
+		return;
+	s_instance = self;
 
 func _ready() -> void:
 	obtainItem(Item.DoorKey)
