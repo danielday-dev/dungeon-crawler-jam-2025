@@ -66,6 +66,13 @@ look_right={
 ]
 }
 
+[layer_names]
+
+3d_physics/layer_1="World"
+3d_physics/layer_2="Player"
+3d_physics/layer_3="Enemy"
+3d_physics/layer_4="CombatStart"
+
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0

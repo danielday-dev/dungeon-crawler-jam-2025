@@ -8,8 +8,7 @@ var m_floorIndex : int;
 var m_wallIndex : int;
 	
 func _init() -> void:
-	if (Engine.is_editor_hint()): return;
-	if (s_level != null):
+	if (s_level != null && !Engine.is_editor_hint()):
 		queue_free();
 		return;
 	s_level = self;
@@ -29,6 +28,8 @@ func loadMeshLibrary() -> void:
 	m_wallIndex = mesh_library.find_item_by_name("Wall");
 
 func cellChanged(pos : Vector3i) -> void:
+	if (pos.y != 0): return;
+	
 	const checks : Array[Vector3i] = [
 		Vector3i(+1, 0, 0),
 		Vector3i(-1, 0, 0),

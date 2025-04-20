@@ -8,7 +8,7 @@ static var s_instance : Player = null;
 @onready var map_cam_position : Node3D = $Head/MapCameraPos
 
 func _init() -> void:
-	if (s_instance != null):
+	if (s_instance != null && !Engine.is_editor_hint()):
 		queue_free();
 		return;
 	s_instance = self;
@@ -19,3 +19,6 @@ func poll_inputs() -> void:
 		ceilf(Input.get_axis("down", "up"))
 	);
 	m_input_turn = Input.get_axis("look_left", "look_right");
+
+func _on_combat_start_area_entered(area: Area3D) -> void:
+	GameState.s_instance.set_state(GameState.State.Combat);
