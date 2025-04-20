@@ -20,7 +20,7 @@ background_mode = 2
 sky = SubResource("Sky_gtnvv")
 tonemap_mode = 2
 
-[node name="Level" type="Node3D"]
+[node name="Level2" type="Node3D"]
 
 [node name="GameState" parent="." instance=ExtResource("1_t80w2")]
 

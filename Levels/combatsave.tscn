@@ -1,8 +1,8 @@
 [gd_scene load_steps=14 format=3 uid="uid://dfpb0wfedv01w"]
 
-[ext_resource type="Script" uid="uid://7jbtp3hsw3gc" path="res://Assets/Combat/combat.gd" id="1_k1dr4"]
+[ext_resource type="PackedScene" uid="uid://b1xlm6mmsi7mp" path="res://Assets/Combat/combat.tscn" id="1_cnvjw"]
 [ext_resource type="PackedScene" uid="uid://dhuuv1e6aff8j" path="res://Assets/Timer/heartbeat.tscn" id="2_cnvjw"]
-[ext_resource type="PackedScene" uid="uid://b4tx0jgg7b4pn" path="res://Assets/Combat/Gun/gun.tscn" id="4_pyban"]
+[ext_resource type="PackedScene" uid="uid://ddffnt81wfxkt" path="res://Assets/Combat/TargetingRing/targeting_ring_3d.tscn" id="5_0m6j6"]
 [ext_resource type="Texture2D" uid="uid://cdvwudv845sho" path="res://Assets/Combat/Sprites/Arrow.png" id="5_cnvjw"]
 [ext_resource type="Script" uid="uid://cjq6hjyjcbwxh" path="res://Assets/Minimap/minimap.gd" id="6_abpda"]
 [ext_resource type="PackedScene" uid="uid://cgnac65wpahfa" path="res://Assets/Combat/WeakPoint/weak_spot.tscn" id="7_k1dr4"]
@@ -28,16 +28,15 @@ tonemap_mode = 2
 
 [node name="Level" type="Node3D"]
 
-[node name="Combat" type="Node3D" parent="." node_paths=PackedStringArray("_weakSpotsParent", "_attackIndicators", "timer")]
-script = ExtResource("1_k1dr4")
+[node name="Combat" parent="." node_paths=PackedStringArray("_timer", "_attackRing", "_weakSpotsParent", "_attackIndicatorsParent") instance=ExtResource("1_cnvjw")]
+_timer = NodePath("../Heartbeat")
+_attackRing = NodePath("../TargetingRing3D")
+_attackPattern = Array[int]([0, 1, 0, 1, 2, 3])
 _weakSpotsParent = NodePath("../Enemy/WeakSpots")
-_attackIndicators = [NodePath("../CanvasLayer/AttackIndicators/AttackUp"), NodePath("../CanvasLayer/AttackIndicators/AttackRight"), NodePath("../CanvasLayer/AttackIndicators/AttackDown"), NodePath("../CanvasLayer/AttackIndicators/AttackLeft")]
-timer = NodePath("../Heartbeat")
+_attackIndicatorsParent = NodePath("../CanvasLayer/AttackIndicators")
 
 [node name="Heartbeat" parent="." node_paths=PackedStringArray("_text") instance=ExtResource("2_cnvjw")]
 _text = NodePath("../CanvasLayer/TimerText")
-
-[node name="Gun" parent="." instance=ExtResource("4_pyban")]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_wav5q")
@@ -111,9 +110,9 @@ anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
 offset_left = -20.0
-offset_top = 80.0
+offset_top = 52.0
 offset_right = 20.0
-offset_bottom = 120.0
+offset_bottom = 92.0
 grow_horizontal = 2
 rotation = -1.5708
 size_flags_horizontal = 8
@@ -167,8 +166,13 @@ size_flags_horizontal = 8
 texture = ExtResource("5_cnvjw")
 flip_h = true
 
+[node name="TargetingRing3D" parent="." node_paths=PackedStringArray("_timer") instance=ExtResource("5_0m6j6")]
+transform = Transform3D(0.75, 0, 0, 0, 0.75, 0, 0, 0, 0.75, 0.100052, -0.0975392, -1.46903)
+_timer = NodePath("../Heartbeat")
+
 [node name="Enemy" type="AnimatedSprite3D" parent="." groups=["WeakSpot"]]
-transform = Transform3D(0.75, 0, 0, 0, 0.75, 0, 0, 0, 0.75, 0.100052, -0.0975392, -1.88379)
+transform = Transform3D(0.75, 0, 0, 0, 0.75, 0, 0, 0, 0.75, 0.100052, -0.0975392, -1.46903)
+billboard = 2
 texture_filter = 0
 sprite_frames = ExtResource("7_pexy1")
 
@@ -181,4 +185,15 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.468908, 0)
 [node name="WeakSpot2" parent="Enemy/WeakSpots" instance=ExtResource("7_k1dr4")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.617466, 0, 0)
 
+[node name="WeakSpot3" parent="Enemy/WeakSpots" instance=ExtResource("7_k1dr4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.583041, 0, 0)
+
+[node name="WeakSpot4" parent="Enemy/WeakSpots" instance=ExtResource("7_k1dr4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.296582, -0.588476, 0)
+
+[node name="WeakSpot5" parent="Enemy/WeakSpots" instance=ExtResource("7_k1dr4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.293828, -0.588476, 0)
+
+[connection signal="weak_spot_reveal" from="Combat" to="TargetingRing3D" method="_on_combat_weak_spot_reveal"]
 [connection signal="heart_beat" from="Heartbeat" to="Combat" method="_on_heartbeat_heart_beat"]
+[connection signal="heart_beat" from="Heartbeat" to="TargetingRing3D" method="_on_heartbeat_heart_beat"]

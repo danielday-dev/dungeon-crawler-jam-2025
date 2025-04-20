@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://ddffnt81wfxkt"]
+
+[ext_resource type="Texture2D" uid="uid://copd2aefevoam" path="res://Assets/Combat/TargetingRing/TargetRing.png" id="1_5jdew"]
+[ext_resource type="Script" uid="uid://bxhojjmw7quel" path="res://Assets/Combat/TargetingRing/targeting_ring.gd" id="2_26u6o"]
+
+[node name="TargetingRing3D" type="Sprite3D"]
+billboard = 2
+texture_filter = 0
+texture = ExtResource("1_5jdew")
+script = ExtResource("2_26u6o")
