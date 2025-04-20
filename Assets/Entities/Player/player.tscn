@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://dvfg7eq1a00s2"]
+[gd_scene load_steps=4 format=3 uid="uid://dvfg7eq1a00s2"]
 
 [ext_resource type="Script" uid="uid://cpsda0ux512xh" path="res://Assets/Entities/Player/player.gd" id="1_61lih"]
 
@@ -6,7 +6,11 @@
 radius = 0.25
 height = 1.0
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_0yqqc"]
+size = Vector3(0.5, 1, 0.5)
+
 [node name="Player" type="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0.5, 0.5)
 script = ExtResource("1_61lih")
 
 [node name="Head" type="Node3D" parent="."]
@@ -16,7 +20,20 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0)
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 0, 0)
 
 [node name="MapCameraPos" type="Node3D" parent="Head"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 5.99878, 0)
+transform = Transform3D(-1, 8.74228e-08, 3.82137e-15, 0, -4.37114e-08, 1, 8.74228e-08, 1, 4.37114e-08, 0, 0.2, 0)
+
+[node name="SpotLight3D" type="SpotLight3D" parent="Head"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
+light_energy = 5.0
 
 [node name="PlayerModel" type="MeshInstance3D" parent="."]
 mesh = SubResource("CapsuleMesh_61lih")
+
+[node name="CombatStartArea" type="Area3D" parent="."]
+collision_layer = 0
+collision_mask = 8
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CombatStartArea"]
+shape = SubResource("BoxShape3D_0yqqc")
+
+[connection signal="area_entered" from="CombatStartArea" to="." method="_on_combat_start_area_entered"]

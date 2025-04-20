@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cihktxjiydix5"]
+
+[ext_resource type="Script" uid="uid://dnxjdoalp4y7u" path="res://Assets/Clear/clear_node.gd" id="1_4slio"]
+
+[node name="ClearNode" type="Node3D"]
+script = ExtResource("1_4slio")
