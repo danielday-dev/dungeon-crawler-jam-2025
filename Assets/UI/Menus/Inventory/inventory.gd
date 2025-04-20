@@ -4,16 +4,37 @@ static var s_instance : Inventory = null;
 
 enum Item{
 	NotAnItem,
-	DoorKey,
+	DoorKey1,
+	DoorKey2,
+	DoorKey3,
+	DoorKey4,
+	DoorKey5,
 	Digoxin,
+	Steroids,
+	BoneMarrow,
+	Blood,
 }
 
 static func itemToText(item : Item):
 	match item:
-		Item.DoorKey:
-			return "Door Key"
+		Item.DoorKey1:
+			return "Engineering Bay Door Key"
+		Item.DoorKey2:
+			return "Engineering Ducts Door Key"
+		Item.DoorKey3:
+			return "blabla"
+		Item.DoorKey4:
+			return "blabla"
+		Item.DoorKey5:
+			return "blabla"
 		Item.Digoxin:
 			return "Digoxin"
+		Item.Steroids:
+			return "Steroids"
+		Item.BoneMarrow:
+			return "Bone Marrow"
+		Item.Blood:
+			return "Blood"
 		Item.NotAnItem, _:
 			return "Error Item"
 
@@ -57,8 +78,18 @@ func useItem(item : Item):
 		Item.Digoxin:
 			print("Lowered your heartbeat a bit.. ")
 			removeItem(Item.Digoxin)
-		Item.DoorKey:
+		Item.BoneMarrow:
+			#increase max health
+			removeItem(Item.BoneMarrow)
+		Item.Blood:
+			#increase health
+			removeItem(Item.Blood)
+		Item.Steroids:
+			removeItem(Item.Steroids)
+		Item.DoorKey1:
 			print("Nothing happens, maybe you shouldve interacted with the door instead? You're always like this")
+		Item.DoorKey2:
+			print("Nothing happens, you know to press the doors, cmon")
 		Item.NotAnItem, _:
 			print("Nothing Happens.")
 
@@ -67,12 +98,3 @@ func _init() -> void:
 		queue_free();
 		return;
 	s_instance = self;
-
-func _ready() -> void:
-	obtainItem(Item.DoorKey)
-	obtainItem(Item.DoorKey)
-	obtainItem(Item.DoorKey)
-	obtainItem(Item.DoorKey)
-	removeItem(Item.DoorKey)
-	removeItem(Item.DoorKey)
-	obtainItem(Item.Digoxin)

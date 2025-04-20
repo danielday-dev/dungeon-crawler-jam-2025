@@ -9,4 +9,5 @@ script = ExtResource("2_o8gag")
 m_item = 0
 
 [node name="Sprite" parent="." index="0"]
+billboard = 2
 texture = ExtResource("3_xppy4")
