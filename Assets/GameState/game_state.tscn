@@ -1,6 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://bcjht1rl7pdq2"]
+[gd_scene load_steps=3 format=3 uid="uid://bcjht1rl7pdq2"]
 
 [ext_resource type="Script" uid="uid://go3hyo4g5kft" path="res://Assets/GameState/game_state.gd" id="1_mlwts"]
+[ext_resource type="Material" uid="uid://bwx3im3l3c5sm" path="res://Assets/LevelBase/Materials/level.tres" id="2_6jent"]
 
 [node name="GameState" type="Node"]
 script = ExtResource("1_mlwts")
+s_material = ExtResource("2_6jent")

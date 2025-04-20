@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://cfvsqr2pwndsw"]
+
+[ext_resource type="Script" uid="uid://df7s4ovj8uk14" path="res://Assets/Clear/clear_manager.gd" id="1_saqwt"]
+[ext_resource type="Material" uid="uid://bwx3im3l3c5sm" path="res://Assets/LevelBase/Materials/level.tres" id="2_bjevl"]
+
+[node name="ClearManager" type="Node"]
+script = ExtResource("1_saqwt")
+s_material = ExtResource("2_bjevl")

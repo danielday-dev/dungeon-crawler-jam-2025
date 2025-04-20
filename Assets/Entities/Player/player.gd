@@ -8,7 +8,7 @@ static var s_instance : Player = null;
 @onready var map_cam_position : Node3D = $Head/MapCameraPos
 
 func _init() -> void:
-	if (s_instance != null):
+	if (s_instance != null && !Engine.is_editor_hint()):
 		queue_free();
 		return;
 	s_instance = self;

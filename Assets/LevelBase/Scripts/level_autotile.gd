@@ -8,8 +8,7 @@ var m_floorIndex : int;
 var m_wallIndex : int;
 	
 func _init() -> void:
-	if (Engine.is_editor_hint()): return;
-	if (s_level != null):
+	if (s_level != null && !Engine.is_editor_hint()):
 		queue_free();
 		return;
 	s_level = self;
