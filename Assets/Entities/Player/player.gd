@@ -4,7 +4,8 @@ class_name Player;
 static var s_instance : Player = null;
 
 @onready var head : Node3D = $Head
-@onready var camera : Camera3D = $Head/FirstPersonCamera
+@onready var cameraTransform : Node3D = $Head/CameraTransform
+@onready var camera : Camera3D = $Head/CameraTransform/FirstPersonCamera
 @onready var map_cam_position : Node3D = $Head/MapCameraPos
 
 func _init() -> void:
@@ -22,3 +23,4 @@ func poll_inputs() -> void:
 
 func _on_combat_start_area_entered(area: Area3D) -> void:
 	GameState.s_instance.set_state(GameState.State.Combat);
+	Combat.s_instance._start_combat(area.get_parent());
