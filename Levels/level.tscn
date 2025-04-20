@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://hr5pvy331ima"]
+[gd_scene load_steps=21 format=3 uid="uid://hr5pvy331ima"]
 
 [ext_resource type="PackedScene" uid="uid://dvfg7eq1a00s2" path="res://Assets/Entities/Player/player.tscn" id="1_s41d2"]
 [ext_resource type="PackedScene" uid="uid://bcjht1rl7pdq2" path="res://Assets/GameState/game_state.tscn" id="1_t80w2"]
@@ -10,9 +10,12 @@
 [ext_resource type="PackedScene" uid="uid://b2ljwpxvaib4e" path="res://Assets/LevelBase/level_base.tscn" id="4_xto7t"]
 [ext_resource type="PackedScene" uid="uid://ddffnt81wfxkt" path="res://Assets/Combat/TargetingRing/targeting_ring_3d.tscn" id="5_eabcg"]
 [ext_resource type="PackedScene" uid="uid://b7va83v27o3r5" path="res://Assets/Entities/Enemies/FleshHulk/flesh_hulk.tscn" id="5_uhyyw"]
+[ext_resource type="Curve" uid="uid://cimeglonmwebj" path="res://Assets/Combat/dodge_curve.tres" id="7_3hgmi"]
+[ext_resource type="Curve" uid="uid://cke3svavh05ce" path="res://Assets/Combat/take_hit_curve.tres" id="8_xsqsu"]
 [ext_resource type="PackedScene" uid="uid://ch76egjwfoxtw" path="res://Assets/Combat/AttackIndicators/attack_indicators.tscn" id="9_dvejp"]
 [ext_resource type="PackedScene" uid="uid://bipdemnub3ll6" path="res://Assets/Interactables/Computer/computer.tscn" id="9_t2u7g"]
 [ext_resource type="PackedScene" uid="uid://c8y2as0h745ng" path="res://Assets/Interactables/Vent/vent.tscn" id="10_vx8ih"]
+[ext_resource type="PackedScene" uid="uid://dtl4rkwgod38y" path="res://Assets/Entities/Enemies/Chicken/chicken_zombie.tscn" id="16_vmy0u"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_s41d2"]
 sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
@@ -33,7 +36,7 @@ background_mode = 1
 ambient_light_source = 2
 ambient_light_color = Color(0.47, 0.47, 0.47, 1)
 
-[node name="Level" type="Node3D"]
+[node name="Level2" type="Node3D"]
 
 [node name="GameState" parent="." instance=ExtResource("1_t80w2")]
 
@@ -48,16 +51,20 @@ _attackRing = NodePath("TargetingRing3D")
 _attackIndicatorsParent = NodePath("../CanvasLayer/AttackIndicators")
 
 [node name="TargetingRing3D" parent="Combat" node_paths=PackedStringArray("_timer") instance=ExtResource("5_eabcg")]
+visible = false
 _timer = NodePath("../../Heartbeat")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_wav5q")
 
 [node name="Player" parent="." instance=ExtResource("1_s41d2")]
+dodgeCurve = ExtResource("7_3hgmi")
+takeHitCurve = ExtResource("8_xsqsu")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="HUD" parent="CanvasLayer" instance=ExtResource("4_8a2b0")]
+mouse_filter = 1
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="CanvasLayer"]
 anchors_preset = 1
@@ -101,10 +108,10 @@ data = {
 }
 metadata/_editor_floor_ = Vector3(0, 1, 0)
 
-[node name="EnemyBase" parent="." instance=ExtResource("5_uhyyw")]
+[node name="FleshHulk" parent="." instance=ExtResource("5_uhyyw")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.5, 0.5, 0.5)
 
-[node name="EnemyBase2" parent="." instance=ExtResource("5_uhyyw")]
+[node name="FleshHulk2" parent="." instance=ExtResource("5_uhyyw")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.5, 0.5, 5.5)
 
 [node name="Interactables" type="Node" parent="."]
@@ -120,3 +127,6 @@ transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -4.5, 
 
 [node name="Vent2" parent="Interactables" instance=ExtResource("10_vx8ih")]
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -1.5, 0.5, 8.5)
+
+[node name="Chicken" parent="." instance=ExtResource("16_vmy0u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.562803, 0.5, -8.32674)

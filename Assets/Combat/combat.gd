@@ -22,6 +22,8 @@ var cam: Camera3D;
 
 signal weak_spot_reveal;
 signal dodge(direction: Vector2);
+signal player_hit();
+signal enemy_hit();
 
 # dict of attack directions and the corresponding input direction that allows you to dodge successfully
 # (the reverse of the attack dir)
@@ -36,10 +38,10 @@ var _attack_index: int = 0;
 var _player_state: PlayerState = PlayerState.NONE;
 var _dodge_input_direction: Vector2 = Vector2.ZERO;
 var _time_since_dodge_input: float = 0.0;
-var _dodge_input_window: float  = 0.25; # dodging within this many seconds of hit will register successfully
+var _dodge_input_window: float  = 0.4; # dodging within this many seconds of hit will register successfully
 var _dodge_input_lockout_time: float = 1.0; # can't dodge again for this many seconds after input
 var _check_click_hit_weak_spot: bool = false;
-var _shoot_input_window: float = 0.25;
+var _shoot_input_window: float = 0.4;
 
 var m_initializedCombat : bool = false;
 var m_enemy : EnemyBase = null;
@@ -62,11 +64,13 @@ func _start_combat(enemy : EnemyBase):
 	_set_visible_indicators();
 	_set_visible_weak_spots();
 	_gun._set_combat_active(true);
-	$Gun.visible = true;
 	
 	_timer.heart_beat.connect(_on_heartbeat_heart_beat);
 	_timer.heart_beat.connect(_attackRing._on_heartbeat_heart_beat);
 	weak_spot_reveal.connect(_attackRing._on_combat_weak_spot_reveal);
+	dodge.connect(Player.s_instance._on_combat_dodge);
+	player_hit.connect(Player.s_instance._on_combat_hit);
+	enemy_hit.connect(m_enemy._on_combat_hit);
 	
 	m_initializedCombat = true;
 	
@@ -76,11 +80,15 @@ func _clear_combat():
 	_set_visible_indicators();
 	_set_visible_weak_spots();
 	_gun._set_combat_active(false);
-	$Gun.visible = false;
+	_attackRing._set_ring_visible(false);
+	m_enemy.queue_free();
 	
 	_timer.heart_beat.disconnect(_on_heartbeat_heart_beat);
 	_timer.heart_beat.disconnect(_attackRing._on_heartbeat_heart_beat);
 	weak_spot_reveal.disconnect(_attackRing._on_combat_weak_spot_reveal);
+	dodge.disconnect(Player.s_instance._on_combat_dodge);
+	player_hit.disconnect(Player.s_instance._on_combat_hit);
+	enemy_hit.disconnect(m_enemy._on_combat_hit);
 	
 func _unhandled_input(event) -> void:
 	if event is not InputEventMouseButton:
@@ -92,7 +100,6 @@ func _unhandled_input(event) -> void:
 	if _current_weak_spot == null:
 		return;
 	
-	_gun._shoot();
 	_check_click_hit_weak_spot = true;
 
 func _physics_process(delta):
@@ -110,16 +117,25 @@ func _physics_process(delta):
 
 	var result = space_state.intersect_ray(query);
 	if !result:
+		_gun._shoot();
 		print_debug("Missed weak spot")
 		return;
 	
-	print_debug("Hit weak spot");
-	
 	_set_visible_weak_spots()
 	_current_weak_spot = null;
+	_attackRing._set_ring_visible(false);
 	
 	if (_timer._bps - _timer._time_since_last_beat > _shoot_input_window):
 		print_debug("Shot too early...")
+		return;
+	
+	#on hit;
+	print_debug("Hit weak spot")
+	_gun._shoot();
+	m_enemy.m_health -= 1;
+	enemy_hit.emit();
+	if (m_enemy.m_health <= 0):
+		GameState.s_instance.set_state(GameState.State.Exploring);
 	
 func _process(delta: float) -> void:
 	if (!GameState.in_state(GameState.State.Combat)): 
@@ -181,6 +197,7 @@ func _attack_hit() -> void:
 		print_debug("Attack dodged");
 	else:
 		print_debug("Attack hit");
+		player_hit.emit();
 	_set_visible_indicators();
 	_processed_action = true;
 

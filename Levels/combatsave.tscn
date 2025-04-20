@@ -34,10 +34,9 @@ point_count = 3
 
 [node name="Level" type="Node3D"]
 
-[node name="Combat" parent="." node_paths=PackedStringArray("_timer", "_attackRing", "_weakSpotsParent", "_attackIndicatorsParent") instance=ExtResource("1_cnvjw")]
+[node name="Combat" parent="." node_paths=PackedStringArray("_timer", "_attackRing", "_attackIndicatorsParent") instance=ExtResource("1_cnvjw")]
 _timer = NodePath("../Heartbeat")
 _attackRing = NodePath("../TargetingRing3D")
-_weakSpotsParent = NodePath("../Enemy/WeakSpots")
 _attackIndicatorsParent = NodePath("../CanvasLayer/AttackIndicators")
 
 [node name="Heartbeat" parent="." node_paths=PackedStringArray("_text") instance=ExtResource("2_cnvjw")]

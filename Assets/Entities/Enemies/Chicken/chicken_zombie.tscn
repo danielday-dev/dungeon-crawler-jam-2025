@@ -1,10 +1,31 @@
-[gd_scene load_steps=3 format=3 uid="uid://dtl4rkwgod38y"]
+[gd_scene load_steps=5 format=3 uid="uid://dtl4rkwgod38y"]
 
 [ext_resource type="PackedScene" uid="uid://dkllpxntoh3mu" path="res://Assets/Entities/Enemies/Base/enemy_base.tscn" id="1_6nyh7"]
 [ext_resource type="Texture2D" uid="uid://m37oxwgvsiy3" path="res://Assets/Entities/Enemies/Chicken/chicken.png" id="2_htocd"]
+[ext_resource type="Curve" uid="uid://cke3svavh05ce" path="res://Assets/Combat/take_hit_curve.tres" id="2_ypdsg"]
+[ext_resource type="PackedScene" uid="uid://cgnac65wpahfa" path="res://Assets/Combat/WeakPoint/weak_spot.tscn" id="3_l0a83"]
 
-[node name="EnemyBase" instance=ExtResource("1_6nyh7")]
+[node name="Chicken" node_paths=PackedStringArray("m_weakSpotsParent") instance=ExtResource("1_6nyh7")]
+m_weakSpotsParent = NodePath("WeakSpots")
+takeHitCurve = ExtResource("2_ypdsg")
 
 [node name="EnemySprite" parent="." index="0"]
 texture_filter = 0
 texture = ExtResource("2_htocd")
+
+[node name="WeakSpots" type="Node3D" parent="." index="3"]
+
+[node name="WeakSpot" parent="WeakSpots" index="0" instance=ExtResource("3_l0a83")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.14621, 0.12)
+visible = false
+pixel_size = 0.004
+
+[node name="WeakSpot2" parent="WeakSpots" index="1" instance=ExtResource("3_l0a83")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.059581, 0.24)
+visible = false
+pixel_size = 0.004
+
+[node name="WeakSpot3" parent="WeakSpots" index="2" instance=ExtResource("3_l0a83")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.206742, 0.24)
+visible = false
+pixel_size = 0.004

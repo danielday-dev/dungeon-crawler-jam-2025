@@ -45,5 +45,28 @@ func updatePath() -> void:
 	if (pathLength > m_engage_path_length_threshold): 
 		m_path.clear();
 		return;
+
+#Combat animation
+@export var takeHitCurve: Curve;
+var m_original_pos: Vector3;
+var m_taken_hit: bool = false;
+var m_hit_lerp: float = 0.0;
+var m_hit_distance: float = 0.15;
+
+func _take_hit(delta: float) -> void:
+	if (!m_taken_hit):
+		return;
+	
+	var curve_value: float = takeHitCurve.sample(m_hit_lerp) * m_hit_distance;
+	position = m_original_pos - Vector3(0.0, 0.0, curve_value);
+	m_hit_lerp += delta;
+	
+	if (m_hit_lerp >= 1.0):
+		m_taken_hit = false;
+		m_hit_lerp = 0.0;
+
+func _on_combat_hit() -> void:
+	m_original_pos = position;
+	m_taken_hit = true;
 		
 	# TODO: It would be all coolios to check line-of-sight with the player here.
