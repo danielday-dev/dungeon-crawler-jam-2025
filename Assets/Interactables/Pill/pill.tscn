@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://bgb515ef7rdxx"]
+
+[ext_resource type="PackedScene" uid="uid://r3bgg2rb0fuc" path="res://Assets/Interactables/Key/key.tscn" id="1_frx0s"]
+[ext_resource type="Texture2D" uid="uid://bc8vegy6ah47k" path="res://Assets/Interactables/Pill/pill.png" id="2_4d2cs"]
+
+[node name="Pill" instance=ExtResource("1_frx0s")]
+
+[node name="Sprite" parent="." index="0"]
+texture = ExtResource("2_4d2cs")
