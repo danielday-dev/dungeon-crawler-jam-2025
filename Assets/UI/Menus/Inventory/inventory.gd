@@ -22,11 +22,11 @@ static func itemToText(item : Item):
 		Item.DoorKey2:
 			return "Engineering Ducts Door Key"
 		Item.DoorKey3:
-			return "blabla"
+			return "Ship Heart Door Key"
 		Item.DoorKey4:
-			return "blabla"
+			return "Ship Heart Vents Door Key"
 		Item.DoorKey5:
-			return "blabla"
+			return "Closet Key"
 		Item.Digoxin:
 			return "Digoxin"
 		Item.Steroids:
