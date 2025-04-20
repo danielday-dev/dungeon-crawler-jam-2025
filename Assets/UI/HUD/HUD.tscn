@@ -13,6 +13,17 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_brvsv")
 
+[node name="AreaNameLabel" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_right = 20.0
+offset_bottom = 23.0
+grow_horizontal = 2
+text = "Engineering Ducts"
+
 [node name="VSplitContainer" type="VSplitContainer" parent="."]
 layout_mode = 1
 anchors_preset = 15
@@ -22,8 +33,11 @@ grow_horizontal = 2
 grow_vertical = 2
 split_offset = 260
 
-[node name="EmptySpace" type="Container" parent="VSplitContainer"]
+[node name="Button" type="Button" parent="VSplitContainer"]
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+text = "Interact"
 
 [node name="ColorRect" type="ColorRect" parent="VSplitContainer"]
 layout_mode = 2
@@ -72,16 +86,7 @@ texture = ExtResource("1_hfs2l")
 expand_mode = 2
 stretch_mode = 4
 
-[node name="INVButton" type="Button" parent="VSplitContainer/ColorRect/HSplitContainer/HSplitContainer/HSplitContainer"]
+[node name="Inventory" parent="VSplitContainer/ColorRect/HSplitContainer/HSplitContainer/HSplitContainer" instance=ExtResource("3_brvsv")]
 layout_mode = 2
-text = "INV"
 
-[node name="Inventory" parent="." instance=ExtResource("3_brvsv")]
-visible = false
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.725
-grow_horizontal = 0
-
-[connection signal="pressed" from="VSplitContainer/ColorRect/HSplitContainer/HSplitContainer/HSplitContainer/INVButton" to="." method="_on_inv_button_pressed"]
-[connection signal="mouse_exited" from="Inventory" to="." method="_on_inventory_mouse_exited"]
+[connection signal="mouse_exited" from="VSplitContainer/ColorRect/HSplitContainer/HSplitContainer/HSplitContainer/Inventory" to="." method="_on_inventory_mouse_exited"]
